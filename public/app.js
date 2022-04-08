@@ -56,7 +56,12 @@ let gameGrid;
 //for images
 let bg;
 
+//game states
 let gameState = "start";
+
+//for the delay
+let time;
+
 
 //Display P5 Canva
 function setup(){
