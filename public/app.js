@@ -39,13 +39,16 @@ let cols = 30;
 let size;
 let score;
 
-//for players
+//for player 1
 let direction;
 let pacman;
 let pacstart_x;
 let pacstart_y;
 let prev_x;
 let prev_y;
+
+//for player 2
+let ghost;
 
 //for Grid
 let gameGrid;
@@ -57,6 +60,8 @@ let gameState = "start";
 
 //Display P5 Canva
 function setup(){
+
+    //frameRate(3);
     background(0);
     bg = loadImage("/images/background.png")
 
@@ -68,6 +73,7 @@ function setup(){
     size = width/rows;
     gameGrid = new Grid(size,rows,cols); //create a new Grid object
     pacman = new Player(14*size, 22*size, size, size);
+    ghost = new Player(14*size, 14*size, size, size);
 
 
     //console.log(wallCoordinates);
@@ -82,6 +88,8 @@ function draw() {
         gameGrid.draw(); //draw the grid
         pacman.display();//draw pacman
         pacman.move();
+
+        ghost.display();
 
         
         currGrid = gameGrid.getCurrValue(pacman.x, pacman.y)// //check pacman position with respect to the grid
@@ -108,12 +116,16 @@ function draw() {
         if (score==gameGrid.toWin){
             gameState = "win";
         }
+        if((pacman.x==ghost.x)&&(pacman.y==ghost.y)){
+            gameState = "lose";
+        }
     }
 
     if (gameState == "win"){
         background(255);
+    } else if (gameState == "lose"){
+        background(255,0,0);
     }
-    console.log(pacman.x)
   }
 
 
@@ -127,7 +139,6 @@ function checkWalls(){
     } else if (pacman.y>=height){
         pacman.y = 0;
     } else if ((direction == 1)&&(currGrid == 2)){ //RIGHT
-        delay
         prev_x = pacman.x-size;
         pacman.x = prev_x;
     } else if ((direction == 3)&&(currGrid == 2)){ //LEFT
