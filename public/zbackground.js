@@ -6,8 +6,8 @@ let height = window.innerHeight;
 // bg image
 let bg;
 
+// create leaves array to randomly assign leaf objects 
 let leaves = [];
-
 
 function setup() {
     //Set the parent of the canvas to an exisitng html element's id value 
