@@ -34,15 +34,28 @@ class Grid {
         222222222222222222222222222222
         `;
       this.grid = this.grid.replace(/\s/g, ""); // IMP : This step removes all the whitespaces in the grid.
+      //this.grid = this.grid.replace("2","0");
       this.size = size;
       this.rows = rows;
       this.cols = cols;
       this.currVal = 0;
+      this.toWin = (this.grid.match(/1/g) || []).length;
     }
   
+    update(gridIndex){
+       this.grid = split(this.grid,""); //to convert into an array
+       this.grid[gridIndex] = 0;
+       this.grid = join(this.grid, ""); //to convert back into a string
+
+    }
+
     draw() {
       //each number in your grid can be a particular element or colour - depends on your game logic
       //loop through the rows and columns and find the grid value at that position in the array
+      this.update();
+
+      //console.log(gridArray);
+
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.cols; j++) {
           //get the grid value - is it 0 or 1
@@ -58,27 +71,41 @@ class Grid {
             fill(255, 255, 0);
             ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
           }else if (gridVal == 2) {
+            //to draw wall
             fill(0,0,255);
             rect(i * this.size, j * this.size, this.size, this.size);
           }
         }
       }
     }
-    
-  // this function is the most important! Given an x and a y it gives you the grid value at that position. Knowing the grid value you can decide what should happen to your player etc.
+
     getCurrValue(x, y) {
-      let gridX = floor(x / this.size);
-      let gridY = floor(y / this.size);
-     // print(gridX, gridY); 
-      return this.grid[gridY* this.cols + gridX]; //this returns gridValue
-    }
-
-
-    getCurrCell(x, y){
         let gridX = floor(x / this.size);
         let gridY = floor(y / this.size);
+       // print(gridX, gridY); 
+        return this.grid[gridY* this.cols + gridX]; //this returns gridValue
+      }
+      getCurrCell(x, y){
+          let gridX = floor(x / this.size);
+          let gridY = floor(y / this.size);
+  
+          return (gridY* this.cols + gridX);
+      }
+    
+    
+  // this function is the most important! Given an x and a y it gives you the grid value at that position. Knowing the grid value you can decide what should happen to your player etc.
+    // getCurrValue(x, y) {
+    //   let gridX = floor(x / this.size);
+    //   let gridY = floor(y / this.size);
+    //  // print(gridX, gridY); 
+    //   return this.grid[gridY* this.cols + gridX]; //this returns gridValue
+    // }
+    // getCurrCell(x, y){
+    //     let gridX = floor(x / this.size);
+    //     let gridY = floor(y / this.size);
 
-        return (gridY* this.cols + gridX);
-    }
+    //     return (gridY* this.cols + gridX);
+    // }
+
 
   }

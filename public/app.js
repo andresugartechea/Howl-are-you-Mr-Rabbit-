@@ -48,21 +48,27 @@ let prev_x;
 let prev_y;
 
 //for Grid
+let gameGrid;
+
+//for images
+let bg;
+
+let gameState = "start";
 
 //Display P5 Canva
 function setup(){
     background(0);
-    frameRate(4);
+    bg = loadImage("/images/background.png")
+
     canvas = createCanvas(600,600);
     canvas.position(windowWidth/3.5, windowHeight/10);
     canvas.style('z-index', '-1');
     score = 0;
 
     size = width/rows;
-
     gameGrid = new Grid(size,rows,cols); //create a new Grid object
-
     pacman = new Player(14*size, 22*size, size, size);
+
 
     //console.log(wallCoordinates);
 
@@ -70,33 +76,44 @@ function setup(){
 
 
 function draw() {
-    background(220);
 
-    gameGrid.grid[0] = "0";
-    gameGrid.draw(); //draw the grid
-    pacman.display();//draw pacman
-    pacman.move();
-    
-    currGrid = gameGrid.getCurrValue(pacman.x, pacman.y)// //check pacman position with respect to the grid
-    cellNum = gameGrid.getCurrCell(pacman.x, pacman.y)// gives index
+    if (gameState == "start"){
+        background(bg);
+        gameGrid.draw(); //draw the grid
+        pacman.display();//draw pacman
+        pacman.move();
 
-    //console.log(currGrid)
-    // depending on the underlying grid value change the colour of the ellipse
+        
+        currGrid = gameGrid.getCurrValue(pacman.x, pacman.y)// //check pacman position with respect to the grid
+        cellNum = gameGrid.getCurrCell(pacman.x, pacman.y)// gives index
 
-    if(currGrid==1) { //if coin
-        score++;
+        //console.log(currGrid)
+        // depending on the underlying grid value change the colour of the ellipse
 
-    } else if (currGrid==2){ //if wall
-    //   pacman.x -=
-    //   y = pacman.y; 
-    // } else {    //empty cell
-    //   fill(0,0,255);
-    // }
+        if(currGrid==1) { //if coin
+            score++;
+            gameGrid.update(cellNum);
+        } else if (currGrid==2){ //if wall
+        //   pacman.x -=
+        //   y = pacman.y; 
+        // } else {    //empty cell
+        //   fill(0,0,255);
+        // }
+        }
+
+        checkWalls();
+
+        //console.log(score);
+
+        if (score==gameGrid.toWin){
+            gameState = "win";
+        }
     }
 
-    checkWalls();
-
-    //console.log(pacman.x)
+    if (gameState == "win"){
+        background(255);
+    }
+    console.log(pacman.x)
   }
 
 
@@ -104,8 +121,13 @@ function checkWalls(){
     if (pacman.x==-size){
         pacman.x = width;
     } else if (pacman.x>=width){
-        pacman.x = -size;
+        pacman.x =-size;
+    } else if (pacman.y <0){
+        pacman.y = height;
+    } else if (pacman.y>=height){
+        pacman.y = 0;
     } else if ((direction == 1)&&(currGrid == 2)){ //RIGHT
+        delay
         prev_x = pacman.x-size;
         pacman.x = prev_x;
     } else if ((direction == 3)&&(currGrid == 2)){ //LEFT
@@ -117,7 +139,7 @@ function checkWalls(){
     } else if ((direction == 4)&&(currGrid == 2)){ //UP
         prev_y = pacman.y-size;
         pacman.y = prev_y;
-    } 
+    }
 }
 
 
