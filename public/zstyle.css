@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 98vh;
+    min-width: 98vw;
+    /*  */
+    background-image: url("images/bg.png");
+    background-color: rgb(25, 56, 25);
+    overscroll-behavior-x: none;
+    overscroll-behavior-y: none;
+    /*  */
+    background-size: cover;
+    background-attachment: fixed;
+    /*  */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    /*  */
+    font-family: 'Varela', sans-serif;
+    color: ivory;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    margin: 0vh;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.main {
+    padding: 20vh 0 15vh 0;
+    min-height: 65vh;
+    /*  */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /*  */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    /*  */
+    position: fixed;
+    /* z-index: 4; */
+}
+
+.main_form {
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main_form_text {
+    margin: 2vh;
+    padding: 1.5vh;
+    display: block;
+    border: none;
+    border: transparent;
+    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.2);
+    /* border-bottom: 1px solid antiquewhite; */
+    color: rgb(250, 235, 215, 0.7);
+    font-size: 1.5vw;
+    text-align: center;
+    /*  */
+    border-radius: 1vh;
+    /* box-shadow: 0vh 0vh 2vh 2vh rgba(0, 0, 0, 0.2); */
+}
+
+.main_title {
+    font-size: 10vh;
+    font-family: 'Fredericka the Great', cursive;
+    margin: 10vh 0 0 0;
+}
+
+#username {
+    width: max-content;
+}
+
+#quote {
+    width: 33vw;
+}
+
+.leaves {
+    display: block;
+}
+
+.leaf_div {
+    display: block;
+    position: fixed;
+    height: min-content;
+    width: min-content;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.leaf_name {
+    /* background-color: hsla(34, 78%, 91%, 0.4); */
+    /* border-radius: 1vh; */
+    /* color: rgb(25, 25, 25); */
+    color: antiquewhite;
+    display: block;
+    /* position: absolute; */
+    top: 100px;
+    text-align: center;
+    width: 9vh;
+    margin: 0 auto;
+    font-size: 2vh;
+    top: 0px;
+}
+
+.leaf_image {
+    display: block;
+    /* position: absolute; */
+    max-height: 9vh;
+    width: auto;
+}
