@@ -34,24 +34,21 @@ window.addEventListener("load", function(){
 // //     drawingCoords = data;
 // // })
 
+
+//for grid class
+let gameGrid;
 let rows = 30
 let cols = 30;
 let size;
-let score;
 
-//for player 1
+//for both players
 let direction;
+let score;
 let pacman;
-let pacstart_x;
-let pacstart_y;
-let prev_x;
-let prev_y;
-
-//for player 2
 let ghost;
-
-//for Grid
-let gameGrid;
+//for the delay
+let time;
+let wait = 300;
 
 //for images
 let bg;
@@ -59,30 +56,27 @@ let bg;
 //game states
 let gameState = "start";
 
-//for the delay
-let time;
-let wait = 300;
+
 
 //Display P5 Canva
 function setup(){
 
-    //frameRate(3);
     background(0);
     bg = loadImage("/images/background.png")
 
     canvas = createCanvas(600,600);
     canvas.position(windowWidth/3.5, windowHeight/10);
     canvas.style('z-index', '-1');
+    
     score = 0;
-
     size = width/rows;
-    gameGrid = new Grid(size,rows,cols); //create a new Grid object
-    pacman = new Player(14*size, 22*size, size, size);
-    ghost = new Player(14*size, 14*size, size, size);
 
+    gameGrid = new Grid(size,rows,cols); //create a new Grid object
+
+    pacman = new Player(14*size, 22*size, size);
+    ghost = new Player(14*size, 14*size, size);
 
     time = millis();
-    //console.log(wallCoordinates);
 
 }
 
@@ -90,20 +84,23 @@ function setup(){
 function draw() {
 
     if (gameState == "start"){
+
         background(bg);
         gameGrid.draw(); //draw the grid
-        //pacman.display();//draw pacman
 
+        
         if(millis() - time >= wait){
-            //pacman.move();
+            pacman.move();
+
             ghost.move();
             //update the stored time
             time = millis();
         }
 
-        ghost.display();
 
-        
+        ghost.display();
+        pacman.display();
+
         currGrid = gameGrid.getCurrValue(pacman.x, pacman.y)// //check pacman position with respect to the grid
         cellNum = gameGrid.getCurrCell(pacman.x, pacman.y)// gives index
 
@@ -116,11 +113,11 @@ function draw() {
         } else if (currGrid==3){ //if wall
             wait -=10;
             gameGrid.update(cellNum);
-        } else if (currGrid ==4){
+        } else if (currGrid ==4){ //if power token
             gameGrid.update(cellNum);
         }
 
-        checkWalls();
+        //checkWalls();
 
         //console.log(score);
 
@@ -140,30 +137,6 @@ function draw() {
   }
 
 
-function checkWalls(){
-    if (pacman.x==-size){
-        pacman.x = width;
-    } else if (pacman.x>=width){
-        pacman.x =-size;
-    } else if (pacman.y <0){
-        pacman.y = height;
-    } else if (pacman.y>=height){
-        pacman.y = 0;
-    } else if ((direction == 1)&&(currGrid == 2)){ //RIGHT
-        prev_x = pacman.x-size;
-        pacman.x = prev_x;
-    } else if ((direction == 3)&&(currGrid == 2)){ //LEFT
-        prev_x = pacman.x+size;
-        pacman.x = prev_x;
-    } else if ((direction == 2)&&(currGrid == 2)){ //UP
-        prev_y = pacman.y+size;
-        pacman.y = prev_y;
-    } else if ((direction == 4)&&(currGrid == 2)){ //UP
-        prev_y = pacman.y-size;
-        pacman.y = prev_y;
-    }
-}
-
 
 function keyPressed() {
     if (keyCode === RIGHT_ARROW) {
@@ -176,7 +149,6 @@ function keyPressed() {
         direction = 4;
 
     }
-
 //     // // //     socket.emit("msgPositionData", msgPost)
 }
   

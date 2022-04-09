@@ -2,7 +2,7 @@ class Grid {
     constructor(size, rows, cols) {
       //you can create an actual grid with 0s and 1s and 2s and so on
       this.grid = `
-        222222222222222222222222222222
+        222222222222212222222222222222
         231111131111132231111131111132
         212222212222212212222212222212
         212222212222212212222212222212
@@ -31,7 +31,7 @@ class Grid {
         212222222222212212222222222212
         212222222222212212222222222212
         211111111111111111111111111112
-        222222222222222222222222222222
+        222222222222212222222222222222
         `;
       this.grid = this.grid.replace(/\s/g, ""); // IMP : This step removes all the whitespaces in the grid.
       //this.grid = this.grid.replace("2","0");
@@ -91,33 +91,21 @@ class Grid {
       }
     }
 
+  // this function is the most important! Given an x and a y it gives you the grid value at that position. Knowing the grid value you can decide what should happen to your player etc.
+
     getCurrValue(x, y) {
         let gridX = floor(x / this.size);
         let gridY = floor(y / this.size);
        // print(gridX, gridY); 
         return this.grid[gridY* this.cols + gridX]; //this returns gridValue
       }
-      getCurrCell(x, y){
-          let gridX = floor(x / this.size);
-          let gridY = floor(y / this.size);
+
+    getCurrCell(x, y){
+        let gridX = floor(x / this.size);
+        let gridY = floor(y / this.size);
   
-          return (gridY* this.cols + gridX);
-      }
+        return (gridY* this.cols + gridX);
+    }
     
-    
-  // this function is the most important! Given an x and a y it gives you the grid value at that position. Knowing the grid value you can decide what should happen to your player etc.
-    // getCurrValue(x, y) {
-    //   let gridX = floor(x / this.size);
-    //   let gridY = floor(y / this.size);
-    //  // print(gridX, gridY); 
-    //   return this.grid[gridY* this.cols + gridX]; //this returns gridValue
-    // }
-    // getCurrCell(x, y){
-    //     let gridX = floor(x / this.size);
-    //     let gridY = floor(y / this.size);
-
-    //     return (gridY* this.cols + gridX);
-    // }
-
 
   }
