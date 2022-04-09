@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <!-- <quotes> -->
+    <!-- <rooms> -->
     <section class="container sketch" id="sketch">
         <script src="zfallingObj.js"></script>
         <script src="zbackground.js"></script>
@@ -35,7 +35,13 @@
         <div id="main_form_div">
             <form class="main_form" id="main_form">
                 <input class="main_form_text" id="username" type="text" placeholder="Please enter your Name" required>
-                <input class="main_form_text" id="quote" type="text" placeholder="Enter something that reminds you of enviroment">
+                <select name="room" class="main_form_text" id="room" style="color: rgb(250, 235, 215, 0.6);">
+                    <option value="">--please choose a room--</option>
+                    <option class="options" value="room1">room1</option>
+                    <option class="options" value="room2">room2</option>
+                    <option class="options" value="room3">room3</option>
+                    <option class="options" value="room4">room4</option>
+                  </select>
                 <button style="display:none;"></button>
             </form>
         </div>

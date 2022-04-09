@@ -67,8 +67,7 @@ body {
     font-size: 1.5vw;
     text-align: center;
     /*  */
-    /* border-radius: 1vh; */
-    /* box-shadow: 0vh 0vh 2vh 2vh rgba(0, 0, 0, 0.2); */
+    width: 20vw;
 }
 
 .main_title {
@@ -77,10 +76,6 @@ body {
     margin: 10vh 0 0 0;
 }
 
-#username {
-    width: max-content;
-}
-
-#quote {
-    width: 33vw;
+.options {
+    color: rgb(250, 235, 215, 0.4);
 }

@@ -1,5 +1,3 @@
-let socket = io();
-
 let width = window.innerWidth;
 let height = window.innerHeight;
 
