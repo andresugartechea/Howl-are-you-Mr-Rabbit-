@@ -3,14 +3,14 @@ class Grid {
       //you can create an actual grid with 0s and 1s and 2s and so on
       this.grid = `
         222222222222222222222222222222
-        211111111111112211111111111112
+        231111131111132231111131111132
         212222212222212212222212222212
         212222212222212212222212222212
         212222212222212212222212222212
-        211111111111111111111111111112
+        211111131111131131111131111132
         212222212212222222212212222212
         212222212212222222212212222212
-        211111112211112211112211111112
+        231111112211112211112211111132
         222222212222212212222212222222
         222222212222212212222212222222
         222222212211111111112212222222
@@ -24,7 +24,7 @@ class Grid {
         211111111111112211111111111112
         212222212222212212222212222212
         212222212222212212222212222212
-        211122211111110111111112221112
+        211122241111110111111112221112
         222122212212222222212212221222
         222122212212222222212212221222
         211111112211112211112211111112
@@ -69,11 +69,23 @@ class Grid {
             rect(i * this.size, j * this.size, this.size, this.size);
             //to draw coin
             fill(255, 255, 0);
-            ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
+            ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/3, this.size/3);
           }else if (gridVal == 2) {
             //to draw wall
             fill(0,0,255);
             rect(i * this.size, j * this.size, this.size, this.size);
+          }else if (gridVal == 3) {
+            fill(0);
+            rect(i * this.size, j * this.size, this.size, this.size);
+            //to draw power coins
+            fill(0, 255, 0);
+            ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
+          }else if (gridVal == 4){
+            fill(0);
+            rect(i * this.size, j * this.size, this.size, this.size);
+            //to draw power coins
+            fill(255,0,255);
+            ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
           }
         }
       }

@@ -61,7 +61,7 @@ let gameState = "start";
 
 //for the delay
 let time;
-
+let wait = 300;
 
 //Display P5 Canva
 function setup(){
@@ -81,6 +81,7 @@ function setup(){
     ghost = new Player(14*size, 14*size, size, size);
 
 
+    time = millis();
     //console.log(wallCoordinates);
 
 }
@@ -91,8 +92,14 @@ function draw() {
     if (gameState == "start"){
         background(bg);
         gameGrid.draw(); //draw the grid
-        pacman.display();//draw pacman
-        pacman.move();
+        //pacman.display();//draw pacman
+
+        if(millis() - time >= wait){
+            //pacman.move();
+            ghost.move();
+            //update the stored time
+            time = millis();
+        }
 
         ghost.display();
 
@@ -106,12 +113,11 @@ function draw() {
         if(currGrid==1) { //if coin
             score++;
             gameGrid.update(cellNum);
-        } else if (currGrid==2){ //if wall
-        //   pacman.x -=
-        //   y = pacman.y; 
-        // } else {    //empty cell
-        //   fill(0,0,255);
-        // }
+        } else if (currGrid==3){ //if wall
+            wait -=10;
+            gameGrid.update(cellNum);
+        } else if (currGrid ==4){
+            gameGrid.update(cellNum);
         }
 
         checkWalls();
