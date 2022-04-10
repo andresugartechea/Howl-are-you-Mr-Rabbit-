@@ -43,13 +43,13 @@ io.sockets.on("connection", (socket) => {
         // add leaf data to leaves
         let details = {
             name: data.name,
-            room: username,
-            x: Math.random(window.innerWidth),
+            room: data.room,
+            x: Math.random(data.width),
             n: data.n
         }
         leaves.push(details);
         io.sockets.emit('newLeaf', details);
-        io.sockets.emit('displayLeaf', details.n);
+        // io.sockets.emit('displayLeaf', details.n);
     })
 })
 

@@ -4,6 +4,7 @@ class FallingObj {
             x: x,
             y: 0
         }
+        console.log(this.loc);
         this.name = name;
         this.g = window.innerHeight - window.innerHeight * 0.1; // end of screen +image height
         this.speed = {
@@ -11,7 +12,7 @@ class FallingObj {
             y: 0
         }; // velocity this.step(prev name)
         this.n = n; // stores array count of images so it can be easily accessible with sockets
-        this.img = loadImage("/images/leaf" + (n) + ".png");
+        this.img = loadImage("/images/leaf" + (n + 1) + ".png");
         this.img_h = window.innerHeight * 0.1;
         this.img_w = this.img.width * (this.img_h / this.img.height);
         // this is to save div elements inside the object so that it can be accessed easily
@@ -23,9 +24,13 @@ class FallingObj {
     update = () => {
         if (this.loc.y >= this.g) {
             this.speed.y = 0;
-            this.loc.y = this.loc.g;
+            this.loc.y = this.g;
+            this.speed.x = 0;
         } else {
-            this.speed.y = 3;
+            this.speed.y = 1;
+        }
+        if (this.loc.x <= 0 || this.loc.x >= window.innerWidth) {
+            this.speed.x *= -1;
         }
         this.loc.y += this.speed.y;
         this.loc.x += this.speed.x;
@@ -33,8 +38,8 @@ class FallingObj {
 
     display = () => {
         this.update(); // socket.on('leafupdate', n) will call this and pass n(aka array index) as argument to edit n
-
-        image(this.image, this.loc.x, this.loc.y, this.img_w, this.img_h);
+        console.log(this.loc.x, this.loc.y);
+        image(this.img, this.loc.x, this.loc.y, this.img_w, this.img_h);
     }
 }
 
