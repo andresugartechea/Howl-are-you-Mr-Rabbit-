@@ -1,10 +1,8 @@
 let socket = io();
 let submit = false;
-
-socket.on('connect', () => {
-    console.log("client connected via sockets");
-
-})
+let leavesObj = [];
+let nameData;
+let n = 0;
 
 window.addEventListener('load', () => {
     let nameForm = document.getElementById('main_form');
@@ -18,34 +16,35 @@ window.addEventListener('load', () => {
         socket.emit('load');
         e.preventDefault();
         username = document.getElementById('username').value;
-        room = document.getElementById('quote').value;
+        room = document.getElementById('room').value;
         nameloc = (Math.random() * (window.innerWidth - 50)).toFixed(2);
         console.log(nameloc);
         nameData = {
             name: username,
-            nameloc: nameloc,
-            n: Math.floor(Math.random() * 4 + 1)
+            room: room,
+            width: window.innerWidth,
+            n: n++
         }
-        qouteloc = {
-            x: (Math.random() * window.innerWidth).toFixed(2) - 20,
-            y: (Math.random() * window.innerHeight).toFixed(2)
-        }
-        locData = {
-            quote: quote,
-            quoteloc: qouteloc
-        }
-
         sessionStorage.setItem('name', username);
-        // sessionStorage.setItem('room', quote);
-
+        sessionStorage.setItem('room', room);
         // nameForm.reset();
         document.getElementById('main_title').style.marginBottom = "15vh";
         formDiv.style.display = "none";
         submit = true;
-
         socket.emit('newLeaf', nameData);
-        for (let i = 0; i < leavesObj.length; i++) {
-            leavesObj[i].display();
-        }
     })
+})
+
+socket.on('connect', () => {
+    console.log("client connected via sockets");
+
+})
+socket.on('prevLeaves', (data) => {
+    for (let i = 0; i < data.length; i++) {
+        leavesObj.push(new FallingObj(data[i].name, data[i].room, data[i].x, data[i].n));
+    }
+})
+
+socket.on('newLeaf', (data) => {
+    leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n));
 })
