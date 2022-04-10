@@ -12,10 +12,10 @@ let app = express();
 let server = http.createServer(app); //
 io = new io.Server(server);
 
+app.use('/', express.static("public"));
+
 // leaves
 let leaves = [];
-
-app.use('/', express.static("public"));
 
 let allMessages = [];
 //when a socket connects, take the socket callback, and display the id in the server
