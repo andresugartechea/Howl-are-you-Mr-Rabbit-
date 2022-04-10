@@ -49,6 +49,7 @@ io.sockets.on("connection", (socket) => {
         }
         leaves.push(details);
         io.sockets.emit('newLeaf', details);
+        io.sockets.emit('displayLeaf', details.n);
     })
 })
 

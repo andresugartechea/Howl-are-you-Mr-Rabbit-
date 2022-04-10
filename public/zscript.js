@@ -48,3 +48,7 @@ socket.on('prevLeaves', (data) => {
 socket.on('newLeaf', (data) => {
     leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n));
 })
+
+socket.on('displayLeaf', (data) => {
+    leavesObj[data].display();
+})
