@@ -33,8 +33,8 @@ window.addEventListener('load', () => {
         console.log(n);
         sessionStorage.setItem('name', username);
         sessionStorage.setItem('room', room);
-        sessionStorage.
-            // nameForm.reset();
+        // sessionStorage.
+        // nameForm.reset();
         document.getElementById('main_title').style.marginBottom = "15vh";
         formDiv.style.display = "none";
         submit = true;
