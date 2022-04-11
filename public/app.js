@@ -27,7 +27,7 @@ window.addEventListener("load", function(){
             'room' : sessionStorage.getItem('room')
         }
         console.log(data);
-        //socket.emit('userData', data);
+        socket.emit('userData', data);
     })
 })
 
