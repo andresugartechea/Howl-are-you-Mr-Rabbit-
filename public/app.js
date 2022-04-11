@@ -3,27 +3,38 @@
 //opens and connects to the socket
 let socket = io();
 
+//for html information
+let coin_html;
+let player_html;
+
+//game states
+let gameState;
+
 //Waits for page to load
 window.addEventListener("load", function(){
 
+    coin_html = document.getElementById("information_role");
+    player_html = document.getElementById("information_coins");
+
+    gameState = "start";
+
     //waits for socket to connect
     socket.on("connect", () => {
-        console.log("Connected to the server via sockets")
+        console.log("Connected to the server via sockets");
     })
 
 })
 
 
-
-// //to resixe window every time there's a change
+//to resixe window every time there's a change
 // function windowResized(){
-//     resizeCanvas(windowWidth, windowHeight);
+//      resizeCanvas(windowWidth, windowHeight);
 // }
 
 
 //for grid class
 let gameGrid;
-let rows = 30
+let rows = 30;
 let cols = 30;
 let size;
 
@@ -39,9 +50,6 @@ let wait = 300;
 //for images
 let bg;
 
-//game states
-let gameState = "start";
-
 
 
 //Display P5 Canva
@@ -51,7 +59,7 @@ function setup(){
     bg = loadImage("/images/background_2.png")
 
     canvas = createCanvas(600,600);
-    canvas.position(windowWidth/3.5, windowHeight/10);
+    //canvas.position(windowWidth/3.5, windowHeight/10);
     canvas.style('z-index', '-1');
     
     score = 0;
@@ -76,6 +84,9 @@ function setup(){
 function draw() {
 
     if (gameState == "start"){
+        coin_html.innerHTML = "your role: holip ";
+        player_html.innerHTML = "coins: " + gameGrid.toWin
+        
 
         background(bg);
         gameGrid.draw(); //draw the grid

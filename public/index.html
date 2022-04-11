@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script> -->
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="zstyle.css">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Varela&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <title>Home</title>
+
+</head>
+
+<body>
+    <!-- <rooms> -->
+    <section class="container sketch" id="sketch">
+        <script src="zfallingObj.js"></script>
+        <script src="zbackground.js"></script>
+    </section>
+    <section class="container main" id="main">
+        <h1 class="main_title" id="main_title">FALLING LEAVES</h1>
+        <div id="main_form_div">
+            <form class="main_form" id="main_form">
+                <select name="room" class="main_form_text" id="room" style="color: rgb(250, 235, 215, 0.6);" required>
+                    <option value="">Please choose a room</option>
+                    <option class="options" value="room1">room1</option>
+                    <option class="options" value="room2">room2</option>
+                    <option class="options" value="room3">room3</option>
+                    <option class="options" value="room4">room4</option>
+                  </select>
+                <input class="main_form_text" id="username" type="text" placeholder="Please enter your Name" required>
+                <input type="submit" name="enter" style="display:none;">
+            </form>
+        </div>
+    </section>
+
+    <!-- LEAVES/Qoutes
+        <img src=images/help.jpg id='i1' ="position:absolute; left: 500; top: 100;">style
+        <br><br><br><br>
+        <div id='msg'></div>
+     -->
+    <script src="zscript.js"></script>
+</body>
+
+</html>

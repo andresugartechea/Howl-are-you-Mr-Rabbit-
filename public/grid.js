@@ -34,7 +34,6 @@ class Grid {
         222222222222212222222222222222
         `;
       this.grid = this.grid.replace(/\s/g, ""); // IMP : This step removes all the whitespaces in the grid.
-      //this.grid = this.grid.replace("2","0");
       this.size = size;
       this.rows = rows;
       this.cols = cols;
