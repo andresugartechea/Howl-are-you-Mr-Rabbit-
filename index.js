@@ -36,7 +36,7 @@ io.sockets.on("connection", (socket) => {
         //console.log(users);
 
         //to limit the number of people in each room 
-        if(rooms[data.room]<MAX_USERS_ROOM){
+        if (rooms[data.room] < MAX_USERS_ROOM) {
             console.log("ALTOO");
         }
 
