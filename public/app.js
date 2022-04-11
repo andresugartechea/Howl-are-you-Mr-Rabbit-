@@ -141,6 +141,7 @@ function draw() {
 
     if (gameState == "win") {
         background(255);
+        socket.emit('gameState')
     } else if (gameState == "lose") {
         background(255, 0, 0);
     }

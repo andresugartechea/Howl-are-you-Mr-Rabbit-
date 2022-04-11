@@ -4,8 +4,14 @@ let height = window.innerHeight;
 // bg image
 let bg;
 let myCanvas;
+let imgs = [];
 
-// create leaves array to randomly assign leaf objects 
+function preload() {
+    for (let i = 0; i < 4; i++) {
+        imgs.push(loadImage("./images/leaf" + (i) + ".png"));
+    }
+}
+
 
 function setup() {
     //Set the parent of the canvas to an exisitng html element's id value 
