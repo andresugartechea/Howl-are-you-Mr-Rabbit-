@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script> -->
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="zscript.js"></script>
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="zstyle.css">
     <!-- fonts -->
@@ -36,10 +37,16 @@
             <form class="main_form" id="main_form">
                 <select name="room" class="main_form_text" id="room" style="color: rgb(250, 235, 215, 0.6);" required>
                     <option value="">Please choose a room</option>
+                    <option class="options" value="room0">room0</option>
                     <option class="options" value="room1">room1</option>
                     <option class="options" value="room2">room2</option>
                     <option class="options" value="room3">room3</option>
                     <option class="options" value="room4">room4</option>
+                    <option class="options" value="room5">room5</option>
+                    <option class="options" value="room6">room6</option>
+                    <option class="options" value="room7">room7</option>
+                    <option class="options" value="room8">room8</option>
+                    <option class="options" value="room9">room9</option>
                   </select>
                 <input class="main_form_text" id="username" type="text" placeholder="Please enter your Name" required>
                 <input type="submit" name="enter" style="display:none;">
@@ -51,8 +58,7 @@
         <img src=images/help.jpg id='i1' ="position:absolute; left: 500; top: 100;">style
         <br><br><br><br>
         <div id='msg'></div>
-     -->
-    <script src="zscript.js"></script>
+    -->
 </body>
 
 </html>

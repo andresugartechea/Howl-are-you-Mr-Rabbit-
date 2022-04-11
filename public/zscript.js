@@ -1,6 +1,7 @@
 let socket = io();
 let submit = false;
 let leavesObj = [];
+let item = [];
 let nameData;
 let n = 0;
 
@@ -22,9 +23,21 @@ window.addEventListener('load', () => {
         nameData = {
             name: username,
             room: room,
-            width: window.innerWidth,
-            n: n++
+            width: random(50, window.innerWidth - 50),
+            n: (leavesObj.length) % 4,
+            speedx: Math.random(-0.5, 0.5)
         }
+        item = document.getElementsByClassName('options');
+        socket.emit('hideRoom', room);
+        // for (let c = 0; c < 10; c++) {
+        //     if (item[c].value == room) {
+
+
+        //         break;
+        //     }
+        // }
+        console.log(nameData.speedx);
+        console.log(n);
         sessionStorage.setItem('name', username);
         sessionStorage.setItem('room', room);
         // nameForm.reset();
@@ -32,6 +45,7 @@ window.addEventListener('load', () => {
         formDiv.style.display = "none";
         submit = true;
         socket.emit('newLeaf', nameData);
+
     })
 })
 
@@ -41,14 +55,17 @@ socket.on('connect', () => {
 })
 socket.on('prevLeaves', (data) => {
     for (let i = 0; i < data.length; i++) {
-        leavesObj.push(new FallingObj(data[i].name, data[i].room, data[i].x, data[i].n));
+        leavesObj.push(new FallingObj(data[i].name, data[i].room, data[i].x, data[i].n, data[i].speedx));
     }
 })
 
 socket.on('newLeaf', (data) => {
-    leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n));
+    leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n, data.speedx));
 })
 
-socket.on('displayLeaf', (data) => {
-    leavesObj[data].display();
+socket.on('hideRoom', (c) => {
+    // console.log(item[c]);
+    // item[c].style.display = "none";
+    let select = document.getElementById('room');
+    select.remove(select.c);
 })

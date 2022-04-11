@@ -6,7 +6,6 @@ let bg;
 let myCanvas;
 
 // create leaves array to randomly assign leaf objects 
-let leaves = [];
 
 function setup() {
     //Set the parent of the canvas to an exisitng html element's id value 
@@ -19,5 +18,12 @@ function setup() {
 function draw() {
     myCanvas = resizeCanvas(window.innerWidth, window.innerHeight)
     background(bg);
+    for (let i = 0; i < leavesObj.length; i++) {
+        leavesObj[i].display();
+    }
+
+}
+
+function mouseClicked(event) {
 
 }
