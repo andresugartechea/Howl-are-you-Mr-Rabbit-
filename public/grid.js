@@ -62,6 +62,7 @@ class Grid {
           let gridVal = this.grid[j * this.rows + i];
           // depending on the value, you can give it the appropriate colour/shape/image
           if (gridVal == 0) {
+            //to draw empty cell
             fill(0);
             rect(i * this.size, j * this.size, this.size, this.size);
           } else if (gridVal == 1) {
@@ -72,7 +73,8 @@ class Grid {
             ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/3, this.size/3);
           }else if (gridVal == 2) {
             //to draw wall
-            fill(0,0,255);
+            noFill();
+            //fill(0,0,255);
             rect(i * this.size, j * this.size, this.size, this.size);
           }else if (gridVal == 3) {
             fill(0);

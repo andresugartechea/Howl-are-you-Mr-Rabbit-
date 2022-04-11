@@ -1,38 +1,24 @@
+//CLIENT side
+
 //opens and connects to the socket
 let socket = io();
 
-//value assigned with user's input
-// // // let msg_text;
+//Waits for page to load
 window.addEventListener("load", function(){
 
-    //listen for confirmation
+    //waits for socket to connect
     socket.on("connect", () => {
         console.log("Connected to the server via sockets")
     })
 
-    // // // //we get the input from the user
-    // // // let msg_input = this.document.getElementById("input-msg");
-
-    // // // //we listen to 'Send' button
-    // // // let submitButton = document.getElementById('submit-button');
-    // // // submitButton.addEventListener('click', function () {
-    // // //     msg_text = msg_input.value;
-    // // //     //console.log(msg_text);
-    // // // });
-
 })
 
-// // // //to resixe window every time there's a change
-// // // function windowResized(){
-// // //     resizeCanvas(windowWidth, windowHeight);
-// // // }
 
 
-// // //to get the coordinates and input of each text drawn by all the users
-// // let drawingCoords={};
-// // socket.on('dataFromServer', (data)=> {
-// //     drawingCoords = data;
-// // })
+// //to resixe window every time there's a change
+// function windowResized(){
+//     resizeCanvas(windowWidth, windowHeight);
+// }
 
 
 //for grid class
@@ -62,7 +48,7 @@ let gameState = "start";
 function setup(){
 
     background(0);
-    bg = loadImage("/images/background.png")
+    bg = loadImage("/images/background_2.png")
 
     canvas = createCanvas(600,600);
     canvas.position(windowWidth/3.5, windowHeight/10);
@@ -77,6 +63,12 @@ function setup(){
     ghost = new Player(14*size, 14*size, size);
 
     time = millis();
+
+    // //to get the directions (input of KEY ARROWS) from both users
+    socket.on('allDirData', (data) => {
+        direction = data.direction;
+            //drawPos(obj);
+    });
 
 }
 
@@ -93,8 +85,7 @@ function draw() {
             pacman.move();
 
             ghost.move();
-            //update the stored time
-            time = millis();
+            time = millis();  //update the stored time
         }
 
 
@@ -104,9 +95,7 @@ function draw() {
         currGrid = gameGrid.getCurrValue(pacman.x, pacman.y)// //check pacman position with respect to the grid
         cellNum = gameGrid.getCurrCell(pacman.x, pacman.y)// gives index
 
-        //console.log(currGrid)
-        // depending on the underlying grid value change the colour of the ellipse
-
+        //depending on the underlying grid value change the colour of the ellipse
         if(currGrid==1) { //if coin
             score++;
             gameGrid.update(cellNum);
@@ -117,9 +106,6 @@ function draw() {
             gameGrid.update(cellNum);
         }
 
-        //checkWalls();
-
-        //console.log(score);
 
         if (score==gameGrid.toWin){
             gameState = "win";
@@ -147,8 +133,13 @@ function keyPressed() {
         direction = 3;
     } else if (keyCode === DOWN_ARROW) {
         direction = 4;
-
     }
-//     // // //     socket.emit("msgPositionData", msgPost)
+
+    //Grab direction
+    let newDirection = {direction: direction};
+    
+    //console.log(newDirection);
+    socket.emit("directionData", newDirection);
+
 }
   
