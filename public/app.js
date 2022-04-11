@@ -55,6 +55,7 @@ let wait = 300;
 
 //for images
 let bg;
+let carrot_img;
 
 
 
@@ -66,6 +67,7 @@ function setup() {
     //for images;
     bg = loadImage("/images/background_2.png")
 
+
     canvas = createCanvas(600, 600);
     //canvas.position(windowWidth/3.5, windowHeight/10);
     canvas.style('z-index', '-1');
@@ -73,8 +75,7 @@ function setup() {
     score = 0;
     size = width / rows;
 
-    pacman = new Player(14 * size, 22 * size, size);
-    ghost = new Player(14 * size, 14 * size, size);
+    gameGrid = new Grid(size, rows, cols); //create a new Grid object
 
     pacman = new Player(14 * size, 22 * size, size);
     ghost = new Player(14 * size, 14 * size, size);
@@ -145,6 +146,7 @@ function draw() {
         background(255, 0, 0);
     }
 }
+
 
 
 function keyPressed() {

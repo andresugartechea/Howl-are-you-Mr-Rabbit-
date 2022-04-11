@@ -20,13 +20,44 @@ io = new io.Server(server);
 const MAX_USERS = 2;
 // to store prev leaves
 let leaves = [];
+let rooms = {}; // key value pair - 'roomname' : number of people in room
+let users = {}; // key value pair - 'username' : userid
 
 //when a socket connects, take the socket callback, and display the id in the server
 io.sockets.on("connection", (socket) => {
     console.log("we have a new client: ", socket.id);
 
     //get user data
-    //socket.on("")
+    socket.on("userData", (data) => {
+        //save username in an array
+        socket.name = data.name;
+        users[socket.name] = socket.id;
+
+        //console.log(users);
+
+        //to limit the number of people in each room 
+        if(rooms[data.room]<MAX_USERS_ROOM){
+            console.log("ALTOO");
+        }
+
+        // // to limit the number of people in a room
+        // if(rooms[data.room]) { //if the room exists 
+        //     if(rooms[data.room]< MAX_USERS_ROOM) {
+        //         //let the socket join room of choice
+        //         socket.roomName = data.room; // we will add this data to the socket only after we can verify that there is space
+        //         socket.join(socket.roomName);
+        //         rooms[socket.roomName]++;
+        //     } else {
+        //         socket.emit('maxUsersReached');
+        //     }
+        // } else {
+        //     socket.roomName = data.room;
+        //     socket.join(socket.roomName);
+        //     rooms[socket.roomName]=1;   
+        // }
+
+        // console.log(rooms);
+    })
 
     //////
 
