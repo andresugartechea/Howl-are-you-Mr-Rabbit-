@@ -28,7 +28,7 @@ window.addEventListener("load", function(){
         }
         console.log(data);
         //socket.emit('userData', data);
-
+    })
 })
 
 
@@ -55,7 +55,6 @@ let wait = 300;
 
 //for images
 let bg;
-let carrot_img;
 
 
 
@@ -66,7 +65,6 @@ function setup(){
 
     //for images;
     bg = loadImage("/images/background_2.png")
-    carrot_img = loadImage("/images/carrot.png")
 
     canvas = createCanvas(600,600);
     //canvas.position(windowWidth/3.5, windowHeight/10);
@@ -77,7 +75,7 @@ function setup(){
 
     gameGrid = new Grid(size,rows,cols); //create a new Grid object
 
-    pacman = new Player(14*size, 22*size, size, carrot_img);
+    pacman = new Player(14*size, 22*size, size);
     ghost = new Player(14*size, 14*size, size);
 
     time = millis();
@@ -163,7 +161,7 @@ function keyPressed() {
     //Grab direction
     let newDirection = {direction: direction};
     
-    //console.log(newDirection);
+    console.log(newDirection);
     socket.emit("directionData", newDirection);
 
 }
