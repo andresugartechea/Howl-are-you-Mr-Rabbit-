@@ -1,5 +1,5 @@
 class Grid {
-    constructor(size, rows, cols) {
+    constructor(size, rows, cols, img_1) {
       //you can create an actual grid with 0s and 1s and 2s and so on
       this.grid = `
         222222222222212222222222222222
@@ -39,6 +39,10 @@ class Grid {
       this.cols = cols;
       this.currVal = 0;
       this.toWin = (this.grid.match(/1/g) || []).length;
+
+      //textures;
+      this.carrot = loadImage("images/carrot.png")
+
     }
   
     update(gridIndex){
@@ -54,33 +58,38 @@ class Grid {
       this.update();
 
       //console.log(gridArray);
-
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.cols; j++) {
-          //get the grid value - is it 0 or 1
+          //get the grid value
           let gridVal = this.grid[j * this.rows + i];
           // depending on the value, you can give it the appropriate colour/shape/image
-          if (gridVal == 0) {
-            //to draw empty cell
+
+          if (gridVal == 0) { //empty cell
             fill(0);
             rect(i * this.size, j * this.size, this.size, this.size);
-          } else if (gridVal == 1) {
+
+          } else if (gridVal == 1) { //to draw carrot
             fill(0);
             rect(i * this.size, j * this.size, this.size, this.size);
+            
             //to draw coin
             fill(255, 255, 0);
-            ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/3, this.size/3);
+            image(this.carrot, i * this.size, j * this.size, this.size, this.size);
+            //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/3, this.size/3);
+
           }else if (gridVal == 2) {
             //to draw wall
             noFill();
-            //fill(0,0,255);
+            fill(0,0,255);
             rect(i * this.size, j * this.size, this.size, this.size);
+
           }else if (gridVal == 3) {
             fill(0);
             rect(i * this.size, j * this.size, this.size, this.size);
             //to draw power coins
             fill(0, 255, 0);
             ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
+
           }else if (gridVal == 4){
             fill(0);
             rect(i * this.size, j * this.size, this.size, this.size);

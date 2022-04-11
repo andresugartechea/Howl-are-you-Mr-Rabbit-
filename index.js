@@ -25,6 +25,11 @@ let leaves = [];
 io.sockets.on("connection", (socket) => {
     console.log("we have a new client: ", socket.id);
 
+    //get user data
+    //socket.on("")
+
+    //////
+
     //drop a message on the server when the socket disconnects
     socket.on("disconnect", () => {
         console.log("socket has been disconnected", socket.id);
