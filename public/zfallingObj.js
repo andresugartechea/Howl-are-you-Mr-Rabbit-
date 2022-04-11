@@ -20,6 +20,7 @@ class FallingObj {
         this.leaf = document.createElement('img'); // create image
         this.nameTag = document.createElement('p'); // create text tag
         this.onme = false;
+        this.temp = this.speed.x;
     }
 
     update = () => {
@@ -30,8 +31,11 @@ class FallingObj {
         } else {
             if (this.onme) {
                 this.speed.y = 0;
+                this.temp = this.speed.x;
+                this.speed.x = 0
             } else {
-                this.speed.y = 0;
+                this.speed.y = 1;
+                this.speed.x = this.temp;
             }
         }
         if (this.loc.x <= this.img_w || this.loc.x >= window.innerWidth - this.img_w) {
@@ -51,6 +55,9 @@ class FallingObj {
             cursor(CROSS, mouseX, mouseY);
             console.log('bla', mouseX, mouseY);
             this.onme = true;
+            if (mouseIsPressed) {
+                window.location = './pacman.html';
+            }
         } else {
             this.onme = false;
         }
