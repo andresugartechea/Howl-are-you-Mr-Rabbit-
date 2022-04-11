@@ -12,7 +12,7 @@ class FallingObj {
             y: 0
         }; // velocity this.step(prev name)
         this.n = n; // stores array count of images so it can be easily accessible with sockets
-        this.img = loadImage("./images/leaf" + (n + 1) + ".png");
+        this.img = loadImage("./images/leaf" + (n) + ".png");
         this.img_h = window.innerHeight * 0.1;
         this.img_w = this.img.width * (this.img_h / this.img.height);
         // this is to save div elements inside the object so that it can be accessed easily
@@ -47,13 +47,14 @@ class FallingObj {
 
     display = () => {
         this.update();
-        this.changeCursor();
         image(this.img, this.loc.x, this.loc.y, this.img_w, this.img_h);
+        this.changeCursor();
     }
     changeCursor = () => {
         if ((mouseX > this.loc.x && mouseX < this.loc.x + this.img_w) && (mouseY > this.loc.y && mouseY < this.loc.y + this.img_h)) {
-            cursor(CROSS, mouseX, mouseY);
-            console.log('bla', mouseX, mouseY);
+            console.log(this.elt);
+
+            cursor('pointer', mouseX, mouseY);
             this.onme = true;
             if (mouseIsPressed) {
                 window.location = './pacman.html';

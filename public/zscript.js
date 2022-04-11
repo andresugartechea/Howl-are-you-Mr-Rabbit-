@@ -26,6 +26,14 @@ window.addEventListener('load', () => {
             n: (leavesObj.length) % 4,
             speedx: Math.random(-1, 1)
         }
+        let item = document.getElementsByClassName('options');
+        for (let c = 0; c < 10; c++) {
+            if (item[c].value == room) {
+
+                socket.emit('hideRoom', c);
+                break;
+            }
+        }
         console.log(nameData.speedx);
         console.log(n);
         sessionStorage.setItem('name', username);
@@ -51,4 +59,8 @@ socket.on('prevLeaves', (data) => {
 
 socket.on('newLeaf', (data) => {
     leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n, data.speedx));
+})
+
+socket.on('hideRoom', (c) => {
+    item[c].style.display = "none";
 })

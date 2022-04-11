@@ -51,6 +51,10 @@ io.sockets.on("connection", (socket) => {
         leaves.push(details);
         io.sockets.emit('newLeaf', details);
     })
+
+    socket.on('hideRoom', (data) => {
+        io.sockets.emit('hideRoom', data);
+    })
 })
 
 //server listening on port
