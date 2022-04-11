@@ -31,7 +31,7 @@ class FallingObj {
         } else {
             if (this.onme) {
                 this.speed.y = 0;
-                this.temp = this.speed.x;
+                // this.temp = this.speed.x;
                 this.speed.x = 0
             } else {
                 this.speed.y = 1;

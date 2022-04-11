@@ -1,6 +1,7 @@
 let socket = io();
 let submit = false;
 let leavesObj = [];
+let item = [];
 let nameData;
 let n = 0;
 
@@ -24,16 +25,17 @@ window.addEventListener('load', () => {
             room: room,
             width: random(50, window.innerWidth - 50),
             n: (leavesObj.length) % 4,
-            speedx: Math.random(-1, 1)
+            speedx: Math.random(-0.5, 0.5)
         }
-        let item = document.getElementsByClassName('options');
-        for (let c = 0; c < 10; c++) {
-            if (item[c].value == room) {
+        item = document.getElementsByClassName('options');
+        socket.emit('hideRoom', room);
+        // for (let c = 0; c < 10; c++) {
+        //     if (item[c].value == room) {
 
-                socket.emit('hideRoom', c);
-                break;
-            }
-        }
+
+        //         break;
+        //     }
+        // }
         console.log(nameData.speedx);
         console.log(n);
         sessionStorage.setItem('name', username);
@@ -62,5 +64,8 @@ socket.on('newLeaf', (data) => {
 })
 
 socket.on('hideRoom', (c) => {
-    item[c].style.display = "none";
+    // console.log(item[c]);
+    // item[c].style.display = "none";
+    let select = document.getElementById('room');
+    select.remove(select.c);
 })
