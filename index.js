@@ -17,25 +17,19 @@ let port = process.env.PORT || 8000;
 let io = require("socket.io");
 io = new io.Server(server);
 
-<<<<<<< HEAD
 //To limit the amount of people in each room
 const MAX_USERS =  2;
+let rooms = {}; // key value pair - 'roomname' : number of people in room
+let users = {}; // key value pair - 'username' : userid
 
-
-=======
-app.use('/', express.static("public"));
-
-// leaves
-let leaves = [];
-
-let allMessages = [];
->>>>>>> a3747f0e2c1a0091d4f5eb76c6415f3a82e63afa
 //when a socket connects, take the socket callback, and display the id in the server
 io.sockets.on("connection", (socket) => {
     console.log("we have a new client: ", socket.id);
 
+    //get user data
+    //socket.on("")
 
-
+    //////
 
     //drop a message on the server when the socket disconnects
     socket.on("disconnect", () => {
@@ -43,7 +37,6 @@ io.sockets.on("connection", (socket) => {
     })
 
 
-<<<<<<< HEAD
 
     //listen for a message named "directionData" from this client
     socket.on("directionData", (data) =>{
@@ -54,25 +47,6 @@ io.sockets.on("connection", (socket) => {
 
     });
  
-=======
-    // leaf stuff
-    socket.on('newLeaf', (data) => {
-        // add leaf data to leaves
-        let details = {
-            name: data.name,
-            room: data.room,
-            x: data.width,
-            n: data.n,
-            speedx: data.speedx
-        }
-        leaves.push(details);
-        io.sockets.emit('newLeaf', details);
-    })
-
-    socket.on('hideRoom', (data) => {
-        io.sockets.emit('hideRoom', data);
-    })
->>>>>>> a3747f0e2c1a0091d4f5eb76c6415f3a82e63afa
 })
 
 

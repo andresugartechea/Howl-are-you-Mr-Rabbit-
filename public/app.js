@@ -21,7 +21,13 @@ window.addEventListener("load", function(){
     //waits for socket to connect
     socket.on("connect", () => {
         console.log("Connected to the server via sockets");
-    })
+
+        let data = {
+            'name' : sessionStorage.getItem('name'),
+            'room' : sessionStorage.getItem('room')
+        }
+        console.log(data);
+        //socket.emit('userData', data);
 
 })
 
@@ -49,6 +55,7 @@ let wait = 300;
 
 //for images
 let bg;
+let carrot_img;
 
 
 
@@ -56,7 +63,10 @@ let bg;
 function setup(){
 
     background(0);
+
+    //for images;
     bg = loadImage("/images/background_2.png")
+    carrot_img = loadImage("/images/carrot.png")
 
     canvas = createCanvas(600,600);
     //canvas.position(windowWidth/3.5, windowHeight/10);
@@ -67,7 +77,7 @@ function setup(){
 
     gameGrid = new Grid(size,rows,cols); //create a new Grid object
 
-    pacman = new Player(14*size, 22*size, size);
+    pacman = new Player(14*size, 22*size, size, carrot_img);
     ghost = new Player(14*size, 14*size, size);
 
     time = millis();
@@ -125,6 +135,9 @@ function draw() {
         //Information displayed on html
         coin_html.innerHTML = "your role: holip ";
         player_html.innerHTML = "coins: " + str(gameGrid.toWin-score);
+        
+        
+        //image(carrot_img,0,0,20,20)
     }
 
     if (gameState == "win"){
@@ -154,4 +167,3 @@ function keyPressed() {
     socket.emit("directionData", newDirection);
 
 }
-  
