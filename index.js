@@ -44,12 +44,12 @@ io.sockets.on("connection", (socket) => {
         let details = {
             name: data.name,
             room: data.room,
-            x: Math.random(data.width),
-            n: data.n
+            x: data.width,
+            n: data.n,
+            speedx: data.speedx
         }
         leaves.push(details);
         io.sockets.emit('newLeaf', details);
-        // io.sockets.emit('displayLeaf', details.n);
     })
 })
 

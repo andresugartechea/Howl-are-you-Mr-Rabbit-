@@ -22,9 +22,12 @@ window.addEventListener('load', () => {
         nameData = {
             name: username,
             room: room,
-            width: window.innerWidth,
-            n: n++
+            width: random(50, window.innerWidth - 50),
+            n: (leavesObj.length) % 4,
+            speedx: Math.random(-1, 1)
         }
+        console.log(nameData.speedx);
+        console.log(n);
         sessionStorage.setItem('name', username);
         sessionStorage.setItem('room', room);
         // nameForm.reset();
@@ -32,6 +35,7 @@ window.addEventListener('load', () => {
         formDiv.style.display = "none";
         submit = true;
         socket.emit('newLeaf', nameData);
+
     })
 })
 
@@ -41,14 +45,10 @@ socket.on('connect', () => {
 })
 socket.on('prevLeaves', (data) => {
     for (let i = 0; i < data.length; i++) {
-        leavesObj.push(new FallingObj(data[i].name, data[i].room, data[i].x, data[i].n));
+        leavesObj.push(new FallingObj(data[i].name, data[i].room, data[i].x, data[i].n, data[i].speedx));
     }
 })
 
 socket.on('newLeaf', (data) => {
-    leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n));
+    leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n, data.speedx));
 })
-
-// socket.on('displayLeaf', (data) => {
-//     leavesObj[data].display();
-// })

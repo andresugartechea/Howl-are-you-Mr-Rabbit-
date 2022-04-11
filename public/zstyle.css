@@ -73,6 +73,7 @@ body {
 .main_title {
     font-size: 10vh;
     font-family: 'Press Start 2P', cursive;
+    text-align: center;
     margin: 10vh 0 0 0;
 }
 

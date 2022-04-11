@@ -20,6 +20,11 @@ function draw() {
     background(bg);
     for (let i = 0; i < leavesObj.length; i++) {
         leavesObj[i].display();
+        // leavesObj[i].changeCursor();
     }
+
+}
+
+function mouseClicked(event) {
 
 }
