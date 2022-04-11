@@ -1,25 +1,20 @@
 //THIS PART IS TAKEN FROM MY CLASS NOTES: https://github.com/MathuraMG/ConnectionsLabSpring22/tree/master/Week_8_Sockets
 
-//to start the server
-
-
-
-
-
-
-
 const { randomBytes } = require("crypto");
 let express = require("express");
 const { all } = require("express/lib/application");
-let http = require("http");
-let io = require("socket.io");
 let app = express();
-let server = http.createServer(app); //
-io = new io.Server(server);
-
 app.use('/', express.static("public"));
 
-let port = process.env.PORT || 8000; // leaves
+//To start HTTP server
+let http = require("http");
+let server = http.createServer(app); //
+let port = process.env.PORT || 8000;
+
+//To start connection with socket.io
+let io = require("socket.io");
+io = new io.Server(server);
+
 
 //To limit the amount of people in each room
 const MAX_USERS = 2;
@@ -45,8 +40,6 @@ io.sockets.on("connection", (socket) => {
         socket.emit("prevLeaves", leaves);
     }
 
-
-    // leaf stuff
     socket.on('newLeaf', (data) => {
         // add leaf data to leaves
         let details = {
@@ -67,6 +60,7 @@ io.sockets.on("connection", (socket) => {
     ////////////////////////////////////
     /// PACKMAN
     ////////////////////////////////////
+
     //listen for a message named "directionData" from this client
     socket.on("directionData", (data) => {
         console.log("Received new direction", data);
@@ -75,10 +69,10 @@ io.sockets.on("connection", (socket) => {
         io.sockets.emit("allDirData", data);
 
     });
-
 })
+
 
 //server listening on port
-server.listen(8000, () => {
-    console.log("listening in port 8000");
-})
+server.listen(port, () => {
+    console.log("Server listening at port: " + port);
+});
