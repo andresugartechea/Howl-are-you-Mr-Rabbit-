@@ -1,42 +1,50 @@
 //THIS PART IS TAKEN FROM MY CLASS NOTES: https://github.com/MathuraMG/ConnectionsLabSpring22/tree/master/Week_8_Sockets
 
 //to start the server
+
+
+
+
+
+
+
 const { randomBytes } = require("crypto");
 let express = require("express");
 const { all } = require("express/lib/application");
 let http = require("http");
-
 let io = require("socket.io");
-
 let app = express();
 let server = http.createServer(app); //
 io = new io.Server(server);
 
 app.use('/', express.static("public"));
 
-// leaves
+let port = process.env.PORT || 8000; // leaves
+
+//To limit the amount of people in each room
+const MAX_USERS = 2;
+// to store prev leaves
 let leaves = [];
 
-let allMessages = [];
 //when a socket connects, take the socket callback, and display the id in the server
 io.sockets.on("connection", (socket) => {
     console.log("we have a new client: ", socket.id);
+
+    //drop a message on the server when the socket disconnects
+    socket.on("disconnect", () => {
+        console.log("socket has been disconnected", socket.id);
+        // delete leaf
+
+    })
+
+    ////////////////////////////////////
+    /// Leaves
+    ////////////////////////////////////
     // add all open rooms
     if (leaves.length > 0) {
         socket.emit("prevLeaves", leaves);
     }
 
-    //drop a message on the server when the socket disconnects
-    socket.on("disconnect", () => {
-        console.log("socket has been disconnected", socket.id);
-    })
-
-    //listen for a message from the client
-    socket.on("msgPositionData", (data) => {
-        allMessages.push(data)
-            //console.log(allMessages);
-        io.sockets.emit('dataFromServer', allMessages);
-    })
 
     // leaf stuff
     socket.on('newLeaf', (data) => {
@@ -55,6 +63,19 @@ io.sockets.on("connection", (socket) => {
     socket.on('hideRoom', (data) => {
         io.sockets.emit('hideRoom', data);
     })
+
+    ////////////////////////////////////
+    /// PACKMAN
+    ////////////////////////////////////
+    //listen for a message named "directionData" from this client
+    socket.on("directionData", (data) => {
+        console.log("Received new direction", data);
+
+        //send the new directions to all the servers
+        io.sockets.emit("allDirData", data);
+
+    });
+
 })
 
 //server listening on port
