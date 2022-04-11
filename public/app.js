@@ -84,9 +84,6 @@ function setup(){
 function draw() {
 
     if (gameState == "start"){
-        coin_html.innerHTML = "your role: holip ";
-        player_html.innerHTML = "coins: " + gameGrid.toWin
-        
 
         background(bg);
         gameGrid.draw(); //draw the grid
@@ -124,6 +121,10 @@ function draw() {
         if((pacman.x==ghost.x)&&(pacman.y==ghost.y)){
             gameState = "lose";
         }
+
+        //Information displayed on html
+        coin_html.innerHTML = "your role: holip ";
+        player_html.innerHTML = "coins: " + str(gameGrid.toWin-score);
     }
 
     if (gameState == "win"){

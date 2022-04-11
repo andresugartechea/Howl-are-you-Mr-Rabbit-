@@ -17,20 +17,25 @@ let port = process.env.PORT || 8000;
 let io = require("socket.io");
 io = new io.Server(server);
 
+//To limit the amount of people in each room
+const MAX_USERS =  2;
 
-// let allMessages = [];
 
 //when a socket connects, take the socket callback, and display the id in the server
 io.sockets.on("connection", (socket) => {
     console.log("we have a new client: ", socket.id);
+
+
+
 
     //drop a message on the server when the socket disconnects
     socket.on("disconnect", () => {
         console.log("client has been disconnected" , socket.id);
     })
 
-    //listen for a message named "directionData" from this client
 
+
+    //listen for a message named "directionData" from this client
     socket.on("directionData", (data) =>{
         console.log("Received new direction", data);
 
