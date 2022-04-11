@@ -1,6 +1,7 @@
 let socket = io();
 let submit = false;
 let leavesObj = [];
+let openedRooms = [];
 let nameData;
 let n = 0;
 
@@ -33,6 +34,8 @@ window.addEventListener('load', () => {
         console.log(n);
         sessionStorage.setItem('name', username);
         sessionStorage.setItem('room', room);
+        console.log(sessionStorage.getItem('name'));
+        console.log(sessionStorage.getItem('room'));
         // sessionStorage.
         // nameForm.reset();
         document.getElementById('main_title').style.marginBottom = "15vh";
