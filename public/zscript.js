@@ -4,8 +4,22 @@ let leavesObj = [];
 let openedRooms = [];
 let nameData;
 let n = 0;
+let roomNames = ["buggs Bunny",
+    "central Park",
+    "carrot",
+    "trees"
+];
+
+function changeRoomNames() {
+    let rooms = document.getElementsByClassName('options');
+    for (let i = 0; i < rooms.length; i++) {
+        let n = i % 4;
+        rooms[i].innerHTML = i + " " + roomNames[n];
+    }
+}
 
 window.addEventListener('load', () => {
+    changeRoomNames();
     let nameForm = document.getElementById('main_form');
     let formDiv = document.getElementById('main_form_div');
     let username;

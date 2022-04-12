@@ -67,10 +67,7 @@ class FallingObj {
 }
 
 /*
-(1) check cropping image on processing for background image resizing
-(2) finish p5 set up functions and create obj array+obj
-(3) test motion of leaves here
-(4) add sockets at commented areas
-(5) add mouse functions and click functions
-(6) add rooms and save data to session storage and join selected room
+(1) restore room at disconnect
+(2) remove leaf at disconnect
+
 */
