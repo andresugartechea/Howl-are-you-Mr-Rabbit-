@@ -56,7 +56,7 @@ let direction_pl2;
 let pacman;
 let ghost;
 let score;
-let coordinates = {}; 
+let coordinates = {};
 
 //for the delay
 let time;
@@ -115,12 +115,14 @@ function setup() {
     // });
 
     socket.on("allPlayersData", (data) => {
-        roles = data;
-    })
-      //Listen for messages named 'data' from the server
-     socket.on('allDirData', function(obj) {
-      console.log(obj);
-     });
+            roles = data;
+        })
+        //Listen for messages named 'data' from the server
+    socket.on('allDirData', function(obj) {
+        console.log(obj);
+        //update location
+
+    });
 
 }
 
@@ -184,9 +186,9 @@ function draw() {
         coin_html.innerHTML = "apples left: " + str(gameGrid.toWin - score);
         player_html.innerHTML = "";
 
-        
+
         //Grab direction
-        let newLocation = { 
+        let newLocation = {
             player1: {
                 new_x: pacman.x,
                 new_y: pacman.y,
@@ -203,19 +205,19 @@ function draw() {
 
     //other gameStates
     if (gameState == "instructions") {
-        image(instructions_img, 0, 0, width, height); 
+        image(instructions_img, 0, 0, width, height);
         fill(255);
         textSize(20)
         textAlign(CENTER);
         text("PRESS SPACEBAR TO CONTINUE", 215, 60, 200, 400)
-        //text("KEY ARROWS TO MOVE", 139, 266)
+            //text("KEY ARROWS TO MOVE", 139, 266)
         fill(0);
         textAlign(LEFT);
         text("A", 134, 235)
         text("S", 190, 235)
         text("D", 241, 235)
         text("W", 188, 182)
-        //console.log(mouseX, mouseY)
+            //console.log(mouseX, mouseY)
         fill(204, 255, 204);
         textSize(15);
         text("Wolf, touching the apples will make them inedible.", 33, 400, 240, 240);
@@ -245,7 +247,7 @@ function draw() {
 }
 
 function keyPressed() {
-    if (gameState == "start"){
+    if (gameState == "start") {
         if (keyCode === RIGHT_ARROW) {
             direction = 1;
         } else if (keyCode === UP_ARROW) {
@@ -255,20 +257,20 @@ function keyPressed() {
         } else if (keyCode === DOWN_ARROW) {
             direction = 4;
         }
-    
-        if ((key === 'd')||(key === 'D')) {
+
+        if ((key === 'd') || (key === 'D')) {
             direction_pl2 = 1;
-        } else if ((key === "w")||(key === 'W')) {
+        } else if ((key === "w") || (key === 'W')) {
             direction_pl2 = 2;
-        } else if ((key === "a")||(key === 'A'))  {
+        } else if ((key === "a") || (key === 'A')) {
             direction_pl2 = 3;
-        } else if ((key === "s")||(key === 'S'))  {
+        } else if ((key === "s") || (key === 'S')) {
             direction_pl2 = 4;
         }
-    
-    } 
-    if (gameState == "instructions"){
-        if (key === " "){
+
+    }
+    if (gameState == "instructions") {
+        if (key === " ") {
             gameState = "start";
         }
     }
