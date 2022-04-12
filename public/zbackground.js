@@ -5,10 +5,12 @@ let height = window.innerHeight;
 let bg;
 let myCanvas;
 let imgs = [];
+let imgsWidth = [];
 
 function preload() {
     for (let i = 0; i < 4; i++) {
         imgs.push(loadImage("./images/leaf" + (i) + ".png"));
+        imgsWidth.push(imgs[i].width);
     }
 }
 

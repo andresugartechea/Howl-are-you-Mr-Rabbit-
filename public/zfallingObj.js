@@ -13,8 +13,9 @@ class FallingObj {
         }; // velocity this.step(prev name)
         this.n = n; // stores array count of images so it can be easily accessible with sockets
         this.img = imgs[n];
+        console.log(imgs);
         this.img_h = window.innerHeight * 0.1;
-        this.img_w = this.img.width * (this.img_h / this.img.height);
+        this.img_w = imgsWidth[n] * (this.img_h / this.img.height);
         // this is to save div elements inside the object so that it can be accessed easily
         this.div_cont = document.createElement('div');; // create div for leaf
         this.leaf = document.createElement('img'); // create image
