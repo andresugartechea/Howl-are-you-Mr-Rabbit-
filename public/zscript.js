@@ -38,13 +38,13 @@ window.addEventListener('load', () => {
         nameData = {
             name: username,
             room: room,
-            width: Math.random() * (window.innerWidth - 50) + 50,
+            x: Math.random() * (window.innerWidth - 50) + 50,
             n: (leavesObj.length) % 4,
             speedx: Math.random(-0.5, 0.5)
         }
         item = document.getElementById('room');
         let hideData = {
-            c: item.selectedIndex,
+            c: item.selectedIndex - 1,
         }
         socket.emit('hideRoom', hideData);
 
@@ -62,10 +62,10 @@ window.addEventListener('load', () => {
         if (room != '') {
             sessionStorage.setItem('player', "1");
             socket.emit('newLeaf', nameData);
-            for (let i = 0; i < 9999; i++) {
+            for (let i = 0; i < 9; i++) {
                 console.log('newLeaf');
             }
-            window.location = './pacman.html';
+            // window.location = './pacman.html';
         }
     })
 })
@@ -74,6 +74,15 @@ window.addEventListener('load', () => {
 socket.on('prevLeaves', (data) => {
     for (let i = 0; i < data.leaves.length; i++) {
         leavesObj.push(new FallingObj(data.leaves[i].name, data.leaves[i].room, data.leaves[i].x, data.leaves[i].n, data.leaves[i].speedx));
+    }
+    let rooms = document.getElementsByClassName('options');
+    let select = document.getElementById('room');
+    for (let i = 0; i < rooms.length; i++) {
+        console.log(data.rooms[rooms[i].value], rooms[i].value);
+        if (data.rooms[rooms[i].value]) {
+            console.log("remove room: ", i);
+            select.remove(i + 1);
+        }
     }
 })
 
@@ -89,5 +98,5 @@ socket.on('newLeaf', (data) => {
 
 socket.on('hideRoom', (data) => {
     let select = document.getElementById('room');
-    select.remove(data.c);
+    select.remove(data.c + 1);
 })

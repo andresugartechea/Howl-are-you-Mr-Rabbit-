@@ -16,7 +16,7 @@ class FallingObj {
         this.img = imgs[n]; //loadImage("./images/leaf" + (n) + ".png");
         console.log(imgs);
         this.img_h = window.innerHeight * 0.1;
-        this.img_w = this.img.width * (this.img_h / this.img.height);
+        this.img_w = this.img_h; //this.img.width * (this.img_h / this.img.height);
         // this is to save div elements inside the object so that it can be accessed easily
         this.div_cont = document.createElement('div');; // create div for leaf
         this.leaf = document.createElement('img'); // create image
