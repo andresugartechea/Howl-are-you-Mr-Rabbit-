@@ -13,8 +13,9 @@ class FallingObj {
         }; // velocity this.step(prev name)
         this.n = n; // stores array count of images so it can be easily accessible with sockets
         this.img = imgs[n];
+        console.log(imgs);
         this.img_h = window.innerHeight * 0.1;
-        this.img_w = this.img.width * (this.img_h / this.img.height);
+        this.img_w = imgsWidth[n] * (this.img_h / this.img.height);
         // this is to save div elements inside the object so that it can be accessed easily
         this.div_cont = document.createElement('div');; // create div for leaf
         this.leaf = document.createElement('img'); // create image
@@ -66,10 +67,7 @@ class FallingObj {
 }
 
 /*
-(1) check cropping image on processing for background image resizing
-(2) finish p5 set up functions and create obj array+obj
-(3) test motion of leaves here
-(4) add sockets at commented areas
-(5) add mouse functions and click functions
-(6) add rooms and save data to session storage and join selected room
+(1) restore room at disconnect
+(2) remove leaf at disconnect
+
 */

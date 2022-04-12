@@ -4,8 +4,23 @@ let leavesObj = [];
 let openedRooms = [];
 let nameData;
 let n = 0;
+let roomNames = ["buggs Bunny",
+    "central Park",
+    "carrot",
+    "trees"
+];
+
+function changeRoomNames() {
+    let rooms = document.getElementsByClassName('options');
+    for (let i = 0; i < rooms.length; i++) {
+        let n = i % roomNames.length;
+        rooms[i].innerHTML = i + " " + roomNames[n];
+        // room value is related to n
+    }
+}
 
 window.addEventListener('load', () => {
+    changeRoomNames();
     let nameForm = document.getElementById('main_form');
     let formDiv = document.getElementById('main_form_div');
     let username;
@@ -64,3 +79,8 @@ socket.on('hideRoom', (c) => {
     let select = document.getElementById('room');
     select.remove(c);
 })
+
+
+
+// text animation
+{ /* <span class="txt-rotate" data-period="2000" data-rotate='[ "Open a new Room to be a rabbit", "or press a new leaf to haunt a rabbit"]'>  in the maze</span> */ }
