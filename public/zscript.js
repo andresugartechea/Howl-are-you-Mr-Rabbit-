@@ -13,7 +13,7 @@ let roomNames = ["buggs Bunny",
 function changeRoomNames() {
     let rooms = document.getElementsByClassName('options');
     for (let i = 0; i < rooms.length; i++) {
-        let n = i % 4;
+        let n = i % roomNames.length;
         rooms[i].innerHTML = i + " " + roomNames[n];
     }
 }
