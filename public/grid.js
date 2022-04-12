@@ -43,6 +43,7 @@ class Grid {
       //textures;
       this.carrot = loadImage("images/carrot.png")
       this.apple = loadImage("images/apple.png")
+      this.g_apple = loadImage("images/apple2.png")
       this.tree = loadImage("images/tree.png")
 
       this.transparency = 40;
@@ -57,7 +58,7 @@ class Grid {
 
     update2(gridIndex2){
       this.grid = split(this.grid,""); //to convert into an array
-      this.grid[gridIndex2] = 2;
+      this.grid[gridIndex2] = 4;
       this.grid = join(this.grid, ""); //to convert back into a string
    }
 
@@ -104,9 +105,9 @@ class Grid {
             image(this.carrot, i * this.size, j * this.size, this.size+3, this.size+3);
             //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
 
-          }else if (gridVal == 4){ //empty non accesible cells
+          }else if (gridVal == 4){ //black apple
             noFill();
-            rect(i * this.size, j * this.size, this.size, this.size);
+            image(this.g_apple, i * this.size+3, j * this.size+3, this.size-7, this.size-7);
             //to draw power coins
             //fill(255,0,255);
             //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);

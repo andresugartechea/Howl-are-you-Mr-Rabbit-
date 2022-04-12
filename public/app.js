@@ -20,7 +20,7 @@ window.addEventListener("load", function() {
     coin_html = document.getElementById("information_role");
     player_html = document.getElementById("information_coins");
 
-    gameState = "start";
+    gameState = "win";
 
     //waits for socket to connect
     socket.on("connect", () => {
@@ -68,17 +68,27 @@ let apple_img;
 let tree_img;
 let bunny_img;
 let wolf_img;
+let bunny_wins_img;
+let wolf_wins_img;
 
 //to assign roles
 let roles;
+
+//for the fonts
+//let gameFont;
 
 //Display P5 Canva
 function setup() {
 
     background(0);
 
+    //for font
+    //gameFont = loadFont('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    
     //for images;
     bg = loadImage("/images/background_2.png")
+    bunny_wins_img = loadImage("/images/bunny_wins.png")
+    wolf_wins_img = loadImage("/images/wolf_wins.png")
 
 
     canvas = createCanvas(600, 600);
@@ -123,6 +133,7 @@ function draw() {
             time = millis(); //update the stored time
         }
 
+
         ghost.display();
         pacman.display();
 
@@ -134,11 +145,12 @@ function draw() {
             score++;
             gameGrid.update(cellNum);
         } else if (currGrid == 3) { //if wall
-            wait -= 10;
-            gameGrid.update(cellNum);
-        } else if (currGrid == 4) { //if power token
+            wait -= 15;
             gameGrid.update(cellNum);
         }
+        // } else if (currGrid == 4) { //if power token
+        //     gameGrid.update(cellNum);
+        // }
 
         currGrid_2 = gameGrid.getCurrValue(ghost.x, ghost.y) // //check pacman position with respect to the grid
         cellNum_2 = gameGrid.getCurrCell(ghost.x, ghost.y) // gives index
@@ -162,15 +174,23 @@ function draw() {
         }
 
         //Information displayed on html
-        coin_html.innerHTML = "your role: holip ";
-        player_html.innerHTML = "coins: " + str(gameGrid.toWin - score);
+        coin_html.innerHTML = "apples left: " + str(gameGrid.toWin - score);
+        player_html.innerHTML = "";
 
     }
 
     if (gameState == "win") {
         background(255);
+        image(bunny_wins_img, 0, 0, width, height);
+        fill(255);
+        textSize(50)
+        text("BUNNY", mouseX, mouseY)
+        coin_html.innerHTML = "GAME OVER";
+        console.log(mouseX, mouseY);
     } else if (gameState == "lose") {
         background(255, 0, 0);
+        image(wolf_wins_img, 0, 0, width, height);
+        coin_html.innerHTML = "GAME OVER";
     }
 }
 
