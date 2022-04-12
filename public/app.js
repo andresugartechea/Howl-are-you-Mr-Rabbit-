@@ -9,10 +9,10 @@ let player_html;
 
 //game states
 let gameState;
-let userData;
 
 //to count players on website
 playerList = [];
+let userData;
 
 //Waits for page to load
 window.addEventListener("load", function() {
@@ -56,6 +56,7 @@ let direction_pl2;
 let pacman;
 let ghost;
 let score;
+let coordinates = {}; 
 
 //for the delay
 let time;
@@ -89,7 +90,7 @@ function setup() {
 
     //for images;
     bg = loadImage("/images/background_2.png")
-    instructions_img = loadImage("/images/instructions.png")
+    instructions_img = loadImage("/images/instructions_2.png")
     bunny_wins_img = loadImage("/images/bunny_wins.png")
     wolf_wins_img = loadImage("/images/wolf_wins.png")
 
@@ -108,22 +109,25 @@ function setup() {
 
     time = millis();
 
-    // //to get the directions (input of KEY ARROWS) from both users
-    socket.on('allDirData', (data) => {
-        console.log(data);
-        //drawPos(obj);
-    });
+    //to get the directions (input of KEY ARROWS) from both users
+    // socket.on('allDirData', (data) => {
+    //     coordinates = data;
+    // });
 
     socket.on("allPlayersData", (data) => {
         roles = data;
     })
+      //Listen for messages named 'data' from the server
+     socket.on('allDirData', function(obj) {
+      console.log(obj);
+     });
 
 }
 
 function draw() {
 
     if (gameState == "start") {
-        //console.log(roles);
+        //console.log(coordinates);
 
         background(bg);
         background(255, 255, 0, 100)
@@ -180,6 +184,21 @@ function draw() {
         coin_html.innerHTML = "apples left: " + str(gameGrid.toWin - score);
         player_html.innerHTML = "";
 
+        
+        //Grab direction
+        let newLocation = { 
+            player1: {
+                new_x: pacman.x,
+                new_y: pacman.y,
+            },
+            player2: {
+                new_x: ghost.x,
+                new_y: ghost.y,
+            },
+        };
+        //console.log(newLocation);
+        socket.emit("directionData", newLocation);
+
     }
 
     //other gameStates
@@ -187,7 +206,16 @@ function draw() {
         image(instructions_img, 0, 0, width, height); 
         fill(255);
         textSize(20)
-        text("KEY ARROWS TO MOVE", 139, 266)
+        textAlign(CENTER);
+        text("PRESS ANY KEY TO CONTINUE", 215, 60, 200, 400)
+        //text("KEY ARROWS TO MOVE", 139, 266)
+        fill(0);
+        textAlign(LEFT);
+        text("A", 134, 235)
+        text("S", 190, 235)
+        text("D", 241, 235)
+        text("W", 188, 182)
+        //console.log(mouseX, mouseY)
         fill(204, 255, 204);
         textSize(15);
         text("Wolf, touching the apples will make them inedible.", 33, 400, 240, 240);
@@ -195,7 +223,7 @@ function draw() {
         text("Bunny, it's time for lunch! Eat all the apples before the Wolf arrives.", 394, 314, 220, 240);
         text("Your favorite! Eat a carrot to gain some speed.", 394, 446, 220, 240);
         fill(255);
-        text("Press any key to continue", 139, 577)
+        //text("Press any key to continue", 139, 577)
     } else if (gameState == "win") {
         background(255);
         image(bunny_wins_img, 0, 0, width, height);
@@ -230,31 +258,16 @@ function keyPressed() {
             direction = 4;
         }
     
-        if (key === 'd') {
+        if ((key === 'd')||(key === 'D')) {
             direction_pl2 = 1;
-        } else if (key === "w") {
+        } else if ((key === "w")||(key === 'W')) {
             direction_pl2 = 2;
-        } else if (key === "a") {
+        } else if ((key === "a")||(key === 'A'))  {
             direction_pl2 = 3;
-        } else if (key === "s") {
+        } else if ((key === "s")||(key === 'S'))  {
             direction_pl2 = 4;
         }
     
-    
-        //Grab direction
-        let newLocation = { 
-            player1: {
-                new_x: pacman.x,
-                new_y: pacman.y,
-            },
-            player2: {
-                new_x: ghost.x,
-                new_y: ghost.y,
-            },
-        };
-    
-        console.log(newLocation);
-        socket.emit("directionData", newLocation);
     } 
     if (gameState == "instructions"){
         if (key === " "){
