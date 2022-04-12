@@ -3,13 +3,20 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: black;
+    background: rgb(237, 237, 237);
+
+    /* background-image: url('images/background_2.png'); */
 }
 
 .information{
-    color: white;
+    color: black;
     /* display: flex;
     flex-direction: row; */
+}
+
+.p5Canvas{
+    padding: 7px;
+    background-color: rgb(0, 45, 0);
 }
 
 

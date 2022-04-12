@@ -9,6 +9,10 @@ let player_html;
 
 //game states
 let gameState;
+let userData;
+
+//to count players on website
+playerList = [];
 
 //Waits for page to load
 window.addEventListener("load", function() {
@@ -22,20 +26,20 @@ window.addEventListener("load", function() {
     socket.on("connect", () => {
         console.log("Connected to the server via sockets");
 
-        let data = {
+        userData = {
             'name': sessionStorage.getItem('name'),
             'room': sessionStorage.getItem('room')
         }
-        console.log(data);
-        //socket.emit('userData', data);
+        socket.emit('userData', userData);
+
+        plhrData = {
+            'player' : socket.id
+        }
+        playerList.push(plhrData);
+        socket.emit('playersData', plhrData);
+    
     })
 })
-
-
-//to resixe window every time there's a change
-// function windowResized(){
-//      resizeCanvas(windowWidth, windowHeight);
-// }
 
 
 //for grid class
@@ -56,8 +60,10 @@ let wait = 300;
 //for images
 let bg;
 let carrot_img;
-
-
+let apple_img;
+let tree_img;
+let bunny_img;
+let wolf_img;
 
 //Display P5 Canva
 function setup() {
@@ -77,8 +83,8 @@ function setup() {
 
     gameGrid = new Grid(size, rows, cols); //create a new Grid object
 
-    pacman = new Player(14 * size, 22 * size, size);
-    ghost = new Player(14 * size, 14 * size, size);
+    pacman = new Player(14*size, 22*size, size, "/images/bunny.png");
+    ghost = new Player(14*size, 14*size, size, "/images/wolf.png");
 
     time = millis();
 
@@ -94,8 +100,10 @@ function setup() {
 function draw() {
 
     if (gameState == "start") {
+        //console.log("this is "+userData);
 
         background(bg);
+        background(255,255,0,100)
         gameGrid.draw(); //draw the grid
 
 
@@ -136,8 +144,6 @@ function draw() {
         coin_html.innerHTML = "your role: holip ";
         player_html.innerHTML = "coins: " + str(gameGrid.toWin - score);
 
-
-        //image(carrot_img,0,0,20,20)
     }
 
     if (gameState == "win") {
