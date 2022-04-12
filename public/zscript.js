@@ -48,7 +48,6 @@ window.addEventListener('load', () => {
         }
         socket.emit('hideRoom', hideData);
 
-
         console.log(nameData.speedx);
         console.log(n);
         sessionStorage.setItem('name', username);
