@@ -33,7 +33,6 @@ window.addEventListener('load', () => {
         e.preventDefault();
         username = document.getElementById('username').value;
         room = document.getElementById('room').value;
-        console.log(nameData);
         item = document.getElementById('room');
         let hideData = {
             c: item.selectedIndex - 1,
