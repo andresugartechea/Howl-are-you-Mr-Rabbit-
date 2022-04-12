@@ -63,8 +63,9 @@ class FallingObj {
                         sessionStorage.setItem('player', "2");
                         sessionStorage.setItem('room', this.room);
                         window.location = './pacman.html';
+                    } else {
+                        window.location = './pacman.html';
                     }
-                    window.location = './pacman.html';
 
                 } else {
                     //add pop up
@@ -73,6 +74,9 @@ class FallingObj {
         } else {
             this.onme = false;
         }
+    }
+    movePakman = () => {
+        window.location = './pacman.html';
     }
 }
 

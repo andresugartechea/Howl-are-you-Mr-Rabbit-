@@ -87,16 +87,16 @@ io.sockets.on("connection", (socket) => {
 
     socket.on('newLeaf', (data) => {
         // add leaf data to leaves
-        let details = {
-            name: data.name,
-            room: data.room,
-            x: data.x,
-            n: data.n,
-            speedx: data.speedx
-        }
-        leaves.push(details);
-        console.log(details);
-        io.sockets.emit('newLeaf', details);
+        console.log("this", data);
+        // let details = {
+        //     name: data.name,
+        //     room: data.room,
+        //     x: data.x,
+        //     n: data.n,
+        //     speedx: data.speedx
+        // }
+        leaves.push(data);
+        io.sockets.emit('newLeaf', data);
     })
     socket.on('hideRoom', (data) => {
         if (rooms["room" + (data.c)]) {

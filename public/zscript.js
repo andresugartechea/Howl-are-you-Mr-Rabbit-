@@ -51,6 +51,7 @@ window.addEventListener('load', () => {
                 speedx: Math.random(-0.5, 0.5)
             }
             socket.emit('newLeaf', nameData);
+            leavesObj[leavesObj.length - 1].movePakman();
             for (let i = 0; i < 9; i++) {
                 console.log('newLeaf');
             }
@@ -65,6 +66,7 @@ window.addEventListener('load', () => {
         submit = true;
     })
 })
+
 
 socket.on('connect', () => {
     console.log('client connected via sockets');
