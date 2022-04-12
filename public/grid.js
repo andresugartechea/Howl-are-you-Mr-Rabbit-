@@ -2,12 +2,12 @@ class Grid {
     constructor(size, rows, cols, img_1) {
       //you can create an actual grid with 0s and 1s and 2s and so on
       this.grid = `
-        222222222222212222222222222222
-        231111131111132231111131111132
+        222222222222222222222222222222
+        231111111111132231111111111132
         212222212222212212222212222212
         212222212222212212222212222212
         212222212222212212222212222212
-        211111131111131131111131111132
+        211111111111111111111111111112
         212222212212222222212212222212
         212222212212222222212212222212
         231111112211112211112211111132
@@ -16,22 +16,22 @@ class Grid {
         222222212211111111112212222222
         222222212212220022212212222222
         222222212212200002212212222222
-        111111111112200002211111111111
+        111111131112200002211131111111
         222222212212222222212212222222
         222222212211111111112212222222
         222222212212222222212212222222
         222222212212222222212212222222
-        211111111111112211111111111112
+        231111111111112211111111111132
         212222212222212212222212222212
         212222212222212212222212222212
-        211122241111110111111112221112
+        211122211111110111111112221112
         222122212212222222212212221222
         222122212212222222212212221222
         211111112211112211112211111112
         212222222222212212222222222212
         212222222222212212222222222212
-        211111111111111111111111111112
-        222222222222212222222222222222
+        231111111111111111111111111132
+        222222222222222222222222222222
         `;
       this.grid = this.grid.replace(/\s/g, ""); // IMP : This step removes all the whitespaces in the grid.
       this.size = size;
@@ -42,6 +42,10 @@ class Grid {
 
       //textures;
       this.carrot = loadImage("images/carrot.png")
+      this.apple = loadImage("images/apple.png")
+      this.tree = loadImage("images/tree.png")
+
+      this.transparency = 40;
 
     }
   
@@ -65,37 +69,41 @@ class Grid {
           // depending on the value, you can give it the appropriate colour/shape/image
 
           if (gridVal == 0) { //empty cell
-            fill(0);
+            fill(255,255,0, this.transparency);
             rect(i * this.size, j * this.size, this.size, this.size);
 
           } else if (gridVal == 1) { //to draw carrot
-            fill(0);
+            noStroke();
+            noFill();
+            //fill(255,255,0, this.transparency);
             rect(i * this.size, j * this.size, this.size, this.size);
             
-            //to draw coin
             fill(255, 255, 0);
-            image(this.carrot, i * this.size, j * this.size, this.size, this.size);
+            image(this.apple, i * this.size+3, j * this.size+3, this.size-7, this.size-7);
             //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/3, this.size/3);
 
           }else if (gridVal == 2) {
             //to draw wall
             noFill();
             fill(0,0,255);
-            rect(i * this.size, j * this.size, this.size, this.size);
+            image(this.tree, i * this.size-7, j * this.size-3, this.size+10, this.size+10);
 
           }else if (gridVal == 3) {
-            fill(0);
+            noStroke();
+            noFill();
+            //fill(255,255,0, this.transparency);
             rect(i * this.size, j * this.size, this.size, this.size);
             //to draw power coins
             fill(0, 255, 0);
-            ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
+            image(this.carrot, i * this.size, j * this.size, this.size, this.size);
+            //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
 
-          }else if (gridVal == 4){
-            fill(0);
+          }else if (gridVal == 4){ //empty non accesible cells
+            noFill();
             rect(i * this.size, j * this.size, this.size, this.size);
             //to draw power coins
-            fill(255,0,255);
-            ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
+            //fill(255,0,255);
+            //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
           }
         }
       }

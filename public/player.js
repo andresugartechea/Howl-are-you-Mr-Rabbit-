@@ -1,5 +1,5 @@
 class Player extends Grid{
-    constructor(x, y, size){
+    constructor(x, y, size, image_name){
         super(size, rows, cols);
         this.x = x;
         this.y = y;
@@ -8,6 +8,9 @@ class Player extends Grid{
         this.yspeed = this.s;
 
         this.currPos;
+
+        //for images
+        this.image = loadImage(image_name)
     }
 
     move(){
@@ -57,6 +60,6 @@ class Player extends Grid{
     display(){
         this.checkWall();
         fill(255, 255, 0)
-        rect(this.x, this.y, this.s, this.s);
+        image(this.image, this.x-7, this.y-7, this.s+15, this.s+15);
     }
 }

@@ -56,8 +56,10 @@ let wait = 300;
 //for images
 let bg;
 let carrot_img;
-
-
+let apple_img;
+let tree_img;
+let bunny_img;
+let wolf_img;
 
 //Display P5 Canva
 function setup(){
@@ -77,8 +79,8 @@ function setup(){
 
     gameGrid = new Grid(size,rows,cols); //create a new Grid object
 
-    pacman = new Player(14*size, 22*size, size);
-    ghost = new Player(14*size, 14*size, size);
+    pacman = new Player(14*size, 22*size, size, "/images/bunny.png");
+    ghost = new Player(14*size, 14*size, size, "/images/bunny.png");
 
     time = millis();
 
@@ -96,6 +98,7 @@ function draw() {
     if (gameState == "start"){
 
         background(bg);
+        background(255,255,0,100)
         gameGrid.draw(); //draw the grid
 
         
