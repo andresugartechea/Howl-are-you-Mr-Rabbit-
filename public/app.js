@@ -121,7 +121,6 @@ function setup() {
     socket.on('allDirData', function(obj) {
         console.log(obj);
         //update location
-
     });
 
 }
