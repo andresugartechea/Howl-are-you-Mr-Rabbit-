@@ -72,7 +72,7 @@ class Grid {
             fill(255,255,0, this.transparency);
             rect(i * this.size, j * this.size, this.size, this.size);
 
-          } else if (gridVal == 1) { //to draw carrot
+          } else if (gridVal == 1) { //to draw apples
             noStroke();
             noFill();
             //fill(255,255,0, this.transparency);
@@ -88,14 +88,14 @@ class Grid {
             fill(0,0,255);
             image(this.tree, i * this.size-7, j * this.size-3, this.size+10, this.size+10);
 
-          }else if (gridVal == 3) {
+          }else if (gridVal == 3) { //to draw carrot
             noStroke();
             noFill();
             //fill(255,255,0, this.transparency);
             rect(i * this.size, j * this.size, this.size, this.size);
             //to draw power coins
             fill(0, 255, 0);
-            image(this.carrot, i * this.size, j * this.size, this.size, this.size);
+            image(this.carrot, i * this.size, j * this.size, this.size+3, this.size+3);
             //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
 
           }else if (gridVal == 4){ //empty non accesible cells

@@ -33,12 +33,17 @@ io.sockets.on("connection", (socket) => {
         socket.name = data.name;
         users[socket.name] = socket.id;
 
-        //console.log(rooms[data.room]);
 
         //to limit the number of people in each room 
-        if(rooms[data.room]<MAX_USERS_ROOM){
+        if(rooms[data.room]<MAX_USERS){
             socket.roomName = data.room; // we will add this data to the socket only after we can verify that there is space
+            socket.join(socket.roomName);
+            rooms[socket.roomName]++;
+        } else {
+            socket.emit("maxUsersReached");
         }
+
+        console.log(rooms);
 
         // // to limit the number of people in a room
         // if(rooms[data.room]) { //if the room exists 
@@ -105,6 +110,13 @@ io.sockets.on("connection", (socket) => {
         io.sockets.emit("allDirData", data);
 
     });
+
+    socket.on('playersData', (data) => {
+        console.log("List of players", data);
+
+        //send the new directions to all the servers
+        io.sockets.emit("allPlayersData", data);
+    })
 })
 
 
