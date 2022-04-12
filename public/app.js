@@ -50,9 +50,11 @@ let size;
 
 //for both players
 let direction;
-let score;
+let direction_pl2;
 let pacman;
 let ghost;
+let score;
+
 //for the delay
 let time;
 let wait = 300;
@@ -64,6 +66,9 @@ let apple_img;
 let tree_img;
 let bunny_img;
 let wolf_img;
+
+//to assign roles
+let roles;
 
 //Display P5 Canva
 function setup() {
@@ -84,7 +89,7 @@ function setup() {
     gameGrid = new Grid(size, rows, cols); //create a new Grid object
 
     pacman = new Player(14*size, 22*size, size, "/images/bunny.png");
-    ghost = new Player(14*size, 14*size, size, "/images/wolf.png");
+    ghost = new Player2(14*size, 14*size, size, "/images/wolf.png");
 
     time = millis();
 
@@ -93,14 +98,17 @@ function setup() {
         direction = data.direction;
         //drawPos(obj);
     });
+    
+    socket.on("allPlayersData", (data)=> {
+        roles = data;
+    })
 
 }
-
 
 function draw() {
 
     if (gameState == "start") {
-        //console.log("this is "+userData);
+        //console.log(roles);
 
         background(bg);
         background(255,255,0,100)
@@ -166,10 +174,22 @@ function keyPressed() {
         direction = 4;
     }
 
+    if (key === 'd') {
+        direction_pl2 = 1;
+    } else if (key === "w") {
+        direction_pl2 = 2;
+    } else if (key === "a") {
+        direction_pl2 = 3;
+    } else if (key === "s") {
+        direction_pl2 = 4;
+    }
+
+
+
     //Grab direction
     let newDirection = { direction: direction };
 
-    console.log(newDirection);
+   // console.log(newDirection);
     socket.emit("directionData", newDirection);
 
 }
