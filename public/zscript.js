@@ -33,40 +33,36 @@ window.addEventListener('load', () => {
         e.preventDefault();
         username = document.getElementById('username').value;
         room = document.getElementById('room').value;
-        nameloc = (Math.random() * (window.innerWidth - 50)).toFixed(2);
-        console.log(nameloc);
-        nameData = {
-            name: username,
-            room: room,
-            x: Math.random() * (window.innerWidth - 50) + 50,
-            n: (leavesObj.length) % 4,
-            speedx: Math.random(-0.5, 0.5)
-        }
+        console.log(nameData);
         item = document.getElementById('room');
         let hideData = {
             c: item.selectedIndex - 1,
         }
         socket.emit('hideRoom', hideData);
-
-        console.log(nameData.speedx);
-        console.log(n);
         sessionStorage.setItem('name', username);
         sessionStorage.setItem('room', room);
-        console.log(sessionStorage.getItem('name'));
-        console.log(sessionStorage.getItem('room'));
-        // sessionStorage.
-        // nameForm.reset();
-        document.getElementById('main_instructions').style.marginBottom = "15vh";
-        formDiv.style.display = "none";
-        submit = true;
         if (room != '') {
+            console.log("player1");
             sessionStorage.setItem('player', "1");
+            nameData = {
+                name: username,
+                room: room,
+                x: Math.random() * (window.innerWidth - 50) + 50,
+                n: (leavesObj.length) % 4,
+                speedx: Math.random(-0.5, 0.5)
+            }
             socket.emit('newLeaf', nameData);
             for (let i = 0; i < 9; i++) {
                 console.log('newLeaf');
             }
             // window.location = './pacman.html';
         }
+
+        // sessionStorage.
+        // nameForm.reset();
+        document.getElementById('main_instructions').style.marginBottom = "15vh";
+        formDiv.style.display = "none";
+        submit = true;
     })
 })
 
@@ -93,7 +89,7 @@ socket.on('connect', () => {
 
 
 socket.on('newLeaf', (data) => {
-    leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n, data.speedx));
+    leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n, data.speedx, ++data.player));
 })
 
 socket.on('hideRoom', (data) => {
