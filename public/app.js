@@ -20,7 +20,7 @@ window.addEventListener("load", function() {
     coin_html = document.getElementById("information_role");
     player_html = document.getElementById("information_coins");
 
-    gameState = "win";
+    gameState = "start";
 
     //waits for socket to connect
     socket.on("connect", () => {
@@ -182,14 +182,19 @@ function draw() {
     if (gameState == "win") {
         background(255);
         image(bunny_wins_img, 0, 0, width, height);
-        fill(255);
-        textSize(50)
-        text("BUNNY", mouseX, mouseY)
+        fill(0);
+        textSize(90)
+        text("BUNNY", 24, 143)
+        text("WINS", 24, 233)
         coin_html.innerHTML = "GAME OVER";
-        console.log(mouseX, mouseY);
+        //console.log(mouseX, mouseY);
     } else if (gameState == "lose") {
         background(255, 0, 0);
+        fill(0);
+        textSize(90)
         image(wolf_wins_img, 0, 0, width, height);
+        text("WOLF", 24, 143)
+        text("WINS", 24, 233)
         coin_html.innerHTML = "GAME OVER";
     }
 }
