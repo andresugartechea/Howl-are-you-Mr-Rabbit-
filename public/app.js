@@ -207,7 +207,7 @@ function draw() {
         fill(255);
         textSize(20)
         textAlign(CENTER);
-        text("PRESS ANY KEY TO CONTINUE", 215, 60, 200, 400)
+        text("PRESS SPACEBAR TO CONTINUE", 215, 60, 200, 400)
         //text("KEY ARROWS TO MOVE", 139, 266)
         fill(0);
         textAlign(LEFT);
