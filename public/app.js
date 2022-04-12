@@ -112,6 +112,7 @@ function setup() {
     //to get the directions (input of KEY ARROWS) from both users
     socket.on('allDirData', (data) => {
         coordinates = data;
+        console.log('bla');
     });
 
     socket.on("allPlayersData", (data) => {
