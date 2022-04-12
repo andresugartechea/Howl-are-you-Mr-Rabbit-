@@ -33,40 +33,36 @@ window.addEventListener('load', () => {
         e.preventDefault();
         username = document.getElementById('username').value;
         room = document.getElementById('room').value;
-        nameloc = (Math.random() * (window.innerWidth - 50)).toFixed(2);
-        console.log(nameloc);
-        nameData = {
-            name: username,
-            room: room,
-            width: Math.random() * (window.innerWidth - 50) + 50,
-            n: (leavesObj.length) % 4,
-            speedx: Math.random(-0.5, 0.5)
-        }
+        console.log(nameData);
         item = document.getElementById('room');
         let hideData = {
-            c: item.selectedIndex,
+            c: item.selectedIndex - 1,
         }
         socket.emit('hideRoom', hideData);
-
-        console.log(nameData.speedx);
-        console.log(n);
         sessionStorage.setItem('name', username);
         sessionStorage.setItem('room', room);
-        console.log(sessionStorage.getItem('name'));
-        console.log(sessionStorage.getItem('room'));
+        if (room != '') {
+            console.log("player1");
+            sessionStorage.setItem('player', "1");
+            nameData = {
+                name: username,
+                room: room,
+                x: Math.random() * (window.innerWidth - 50) + 50,
+                n: (leavesObj.length) % 4,
+                speedx: Math.random(-0.5, 0.5)
+            }
+            socket.emit('newLeaf', nameData);
+            for (let i = 0; i < 9; i++) {
+                console.log('newLeaf');
+            }
+            // window.location = './pacman.html';
+        }
+
         // sessionStorage.
         // nameForm.reset();
         document.getElementById('main_instructions').style.marginBottom = "15vh";
         formDiv.style.display = "none";
         submit = true;
-        if (room != '') {
-            sessionStorage.setItem('player', "1");
-            socket.emit('newLeaf', nameData);
-            for (let i = 0; i < 9999; i++) {
-                console.log('newLeaf');
-            }
-            window.location = './pacman.html';
-        }
     })
 })
 
@@ -74,6 +70,15 @@ window.addEventListener('load', () => {
 socket.on('prevLeaves', (data) => {
     for (let i = 0; i < data.leaves.length; i++) {
         leavesObj.push(new FallingObj(data.leaves[i].name, data.leaves[i].room, data.leaves[i].x, data.leaves[i].n, data.leaves[i].speedx));
+    }
+    let rooms = document.getElementsByClassName('options');
+    let select = document.getElementById('room');
+    for (let i = 0; i < rooms.length; i++) {
+        console.log(data.rooms[rooms[i].value], rooms[i].value);
+        if (data.rooms[rooms[i].value]) {
+            console.log("remove room: ", i);
+            select.remove(i + 1);
+        }
     }
 })
 
@@ -84,10 +89,10 @@ socket.on('connect', () => {
 
 
 socket.on('newLeaf', (data) => {
-    leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n, data.speedx));
+    leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n, data.speedx, ++data.player));
 })
 
 socket.on('hideRoom', (data) => {
     let select = document.getElementById('room');
-    select.remove(data.c);
+    select.remove(data.c + 1);
 })

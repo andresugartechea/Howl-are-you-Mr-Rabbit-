@@ -16,7 +16,7 @@ class FallingObj {
         this.img = imgs[n]; //loadImage("./images/leaf" + (n) + ".png");
         console.log(imgs);
         this.img_h = window.innerHeight * 0.1;
-        this.img_w = this.img.width * (this.img_h / this.img.height);
+        this.img_w = this.img_h; //this.img.width * (this.img_h / this.img.height);
         // this is to save div elements inside the object so that it can be accessed easily
         this.div_cont = document.createElement('div');; // create div for leaf
         this.leaf = document.createElement('img'); // create image
@@ -54,16 +54,18 @@ class FallingObj {
     changeCursor = () => {
         if ((mouseX > this.loc.x && mouseX < this.loc.x + this.img_w) && (mouseY > this.loc.y && mouseY < this.loc.y + this.img_h)) {
             new p5.Element(this.img);
-            // this.img.id('img');
-            console.log(this.img.elt);
-
             cursor('pointer', mouseX, mouseY);
             this.onme = true;
             if (mouseIsPressed) {
                 if (document.getElementById('username').value) {
-                    sessionStorage.setItem('room', this.room);
-                    sessionStorage.setItem('player', "2");
+                    // console.log(".", this.room, sessionStorage.getItem('player'), sessionStorage.getItem('name'));
+                    if (!sessionStorage.getItem('player')) {
+                        sessionStorage.setItem('player', "2");
+                        sessionStorage.setItem('room', this.room);
+                        window.location = './pacman.html';
+                    }
                     window.location = './pacman.html';
+
                 } else {
                     //add pop up
                 }

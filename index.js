@@ -69,8 +69,7 @@ io.sockets.on("connection", (socket) => {
     //drop a message on the server when the socket disconnects
     socket.on("disconnect", () => {
         console.log("socket has been disconnected", socket.id);
-        // delete leaf
-
+        // delete leaves and restore rooms
     })
 
     ////////////////////////////////////
@@ -90,7 +89,7 @@ io.sockets.on("connection", (socket) => {
         let details = {
             name: data.name,
             room: data.room,
-            x: data.width,
+            x: data.x,
             n: data.n,
             speedx: data.speedx
         }
@@ -98,12 +97,11 @@ io.sockets.on("connection", (socket) => {
         console.log(details);
         io.sockets.emit('newLeaf', details);
     })
-
     socket.on('hideRoom', (data) => {
-        if (rooms["room" + data.c]) {
-            rooms["room" + data.c]++;
+        if (rooms["room" + (data.c)]) {
+            rooms["room" + (data.c)]++;
         } else {
-            rooms["room" + data.c] = 0;
+            rooms["room" + (data.c)] = 1;
         }
         io.sockets.emit('hideRoom', data);
     })
