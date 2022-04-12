@@ -23,7 +23,7 @@ class Player2 extends Player{
     }
 
     checkWall(){
-        this.currPos = this.getCurrValue(this.pl_x, this.pl_y);
+        this.currPos = this.getCurrValue(this.x, this.y);
 
         if (this.x==-this.s){ //left path,pacman goes back in the map on the right
             this.x = width-this.s;
@@ -33,18 +33,19 @@ class Player2 extends Player{
             this.y = height;
         } else if (this.y>height){ //down path, pacman goes back in the from from the top
             this.y = 0;
-        } else if ((direction == 1)&&(this.currPos == 2)){ //wall on the RIGHT
+        } else if ((direction_pl2 == 1)&&(this.currPos == 2)){ //wall on the RIGHT
             let prev_x = this.x-this.s;
             this.x = prev_x;
-        } else if ((direction == 3)&&(this.currPos == 2)){ //wall on the LEFT
+        } else if ((direction_pl2 == 3)&&(this.currPos == 2)){ //wall on the LEFT
             let prev_x = this.x+this.s;
             this.x = prev_x;
-        } else if ((direction == 2)&&(this.currPos == 2)){ //wall UP
+        } else if ((direction_pl2 == 2)&&(this.currPos == 2)){ //wall UP
             let prev_y = this.y+this.s;
             this.y = prev_y;
-        } else if ((direction == 4)&&(this.currPos == 2)){ //UP
+        } else if ((direction_pl2 == 4)&&(this.currPos == 2)){ //UP
             let prev_y = this.y-this.s;
             this.y = prev_y;
         }
+
     }
 }
