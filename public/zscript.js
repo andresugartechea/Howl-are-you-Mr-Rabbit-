@@ -62,6 +62,7 @@ window.addEventListener('load', () => {
         submit = true;
         if (room != '') {
             socket.emit('newLeaf', nameData);
+            window.location = './pacman.html';
         }
     })
 })
