@@ -53,13 +53,19 @@ class Grid {
        this.grid = split(this.grid,""); //to convert into an array
        this.grid[gridIndex] = 0;
        this.grid = join(this.grid, ""); //to convert back into a string
-
     }
+
+    update2(gridIndex2){
+      this.grid = split(this.grid,""); //to convert into an array
+      this.grid[gridIndex2] = 2;
+      this.grid = join(this.grid, ""); //to convert back into a string
+   }
 
     draw() {
       //each number in your grid can be a particular element or colour - depends on your game logic
       //loop through the rows and columns and find the grid value at that position in the array
       this.update();
+      this.update2();
 
       //console.log(gridArray);
       for (let i = 0; i < this.rows; i++) {
