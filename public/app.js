@@ -33,11 +33,11 @@ window.addEventListener("load", function() {
         socket.emit('userData', userData);
 
         plhrData = {
-            'player' : socket.id
+            'player': socket.id
         }
         playerList.push(plhrData);
         socket.emit('playersData', plhrData);
-    
+
     })
 })
 
@@ -88,8 +88,8 @@ function setup() {
 
     gameGrid = new Grid(size, rows, cols); //create a new Grid object
 
-    pacman = new Player(14*size, 22*size, size, "/images/bunny.png");
-    ghost = new Player2(14*size, 14*size, size, "/images/wolf.png");
+    pacman = new Player(14 * size, 22 * size, size, "/images/bunny.png");
+    ghost = new Player2(14 * size, 14 * size, size, "/images/wolf.png");
 
     time = millis();
 
@@ -98,8 +98,8 @@ function setup() {
         direction = data.direction;
         //drawPos(obj);
     });
-    
-    socket.on("allPlayersData", (data)=> {
+
+    socket.on("allPlayersData", (data) => {
         roles = data;
     })
 
@@ -111,7 +111,7 @@ function draw() {
         //console.log(roles);
 
         background(bg);
-        background(255,255,0,100)
+        background(255, 255, 0, 100)
         gameGrid.draw(); //draw the grid
 
 
@@ -189,7 +189,7 @@ function keyPressed() {
     //Grab direction
     let newDirection = { direction: direction };
 
-   // console.log(newDirection);
+    // console.log(newDirection);
     socket.emit("directionData", newDirection);
 
 }
