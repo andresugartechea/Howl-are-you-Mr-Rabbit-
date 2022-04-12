@@ -117,11 +117,9 @@ function draw() {
 
         if (millis() - time >= wait) {
             pacman.move();
-
             ghost.move();
             time = millis(); //update the stored time
         }
-
 
         ghost.display();
         pacman.display();
@@ -138,6 +136,19 @@ function draw() {
             gameGrid.update(cellNum);
         } else if (currGrid == 4) { //if power token
             gameGrid.update(cellNum);
+        }
+
+        currGrid_2 = gameGrid.getCurrValue(ghost.x, ghost.y) // //check pacman position with respect to the grid
+        cellNum_2 = gameGrid.getCurrCell(ghost.x, ghost.y) // gives index
+        //depending on the underlying grid value change the colour of the ellipse
+        if (currGrid_2 == 1) { //if coin
+            score++;
+            gameGrid.update(cellNum_2);
+        } else if (currGrid_2 == 3) { //if wall
+            wait -= 10;
+            gameGrid.update(cellNum_2);
+        } else if (currGrid == 4) { //if power token
+            gameGrid.update(cellNum_2);
         }
 
 
