@@ -46,7 +46,8 @@ window.addEventListener('load', () => {
         let hideData = {
             c: item.selectedIndex,
         }
-        socket.emit('hideRoom', );
+        socket.emit('hideRoom', hideData);
+
 
         console.log(nameData.speedx);
         console.log(n);
@@ -59,14 +60,16 @@ window.addEventListener('load', () => {
         document.getElementById('main_instructions').style.marginBottom = "15vh";
         formDiv.style.display = "none";
         submit = true;
-        socket.emit('newLeaf', nameData);
+        if (room != '') {
+            socket.emit('newLeaf', nameData);
+        }
     })
 })
 
 
 socket.on('prevLeaves', (data) => {
     for (let i = 0; i < data.leaves.length; i++) {
-        leavesObj.push(new FallingObj(data[i].name, data[i].room, data[i].x, data[i].n, data[i].speedx));
+        leavesObj.push(new FallingObj(data.leaves[i].name, data.leaves[i].room, data.leaves[i].x, data.leaves[i].n, data.leaves[i].speedx));
     }
 })
 
