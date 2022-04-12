@@ -33,6 +33,7 @@ io.sockets.on("connection", (socket) => {
         socket.name = data.name;
         users[socket.name] = socket.id;
 
+        socket.roomname = data.room;
 
         //to limit the number of people in each room 
         if (rooms[data.room] < MAX_USERS) {
@@ -115,7 +116,7 @@ io.sockets.on("connection", (socket) => {
         console.log("Received new direction", data);
 
         //send the new directions to all the servers
-        io.sockets.emit("allDirData", data);
+        socket.to(socket.roomname).emit("allDirData", data);
 
     });
 
@@ -123,7 +124,7 @@ io.sockets.on("connection", (socket) => {
         console.log("List of players", data);
 
         //send the new directions to all the servers
-        io.sockets.emit("allPlayersData", data);
+        socket.to(socket.roomname).emit("allPlayersData", data);
     })
 })
 
