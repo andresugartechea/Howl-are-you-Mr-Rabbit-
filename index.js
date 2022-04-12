@@ -108,7 +108,7 @@ io.sockets.on("connection", (socket) => {
 
     //listen for a message named "directionData" from this client
     socket.on("directionData", (data) => {
-        console.log("Received new direction", data);
+        //console.log("Received new direction", data);
 
         //send the new directions to all the servers
         socket.to(socket.roomname).emit("allDirData", data);

@@ -192,7 +192,7 @@ function draw() {
         coin_html.innerHTML = "apples left: " + str(gameGrid.toWin - score);
         player_html.innerHTML = "";
 
-        
+
         // //Grab direction
         // let newLocation = { 
         //     player1: {
@@ -273,18 +273,18 @@ function keyPressed() {
         } else if ((key === "s") || (key === 'S')) {
             direction_pl2 = 4;
         }
-        
+
         //Grab direction
-        let newDirection = { 
+        let newDirection = {
             pl1_dir: direction,
             pl2_dir: direction_pl2
         };
         //console.log(newLocation);
         socket.emit("directionData", newDirection);
-    
-    } 
-    if (gameState == "instructions"){
-        if (key === " "){
+
+    }
+    if (gameState == "instructions") {
+        if (key === " ") {
             gameState = "start";
         }
     }
