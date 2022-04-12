@@ -12,10 +12,10 @@ class FallingObj {
             y: 0
         }; // velocity this.step(prev name)
         this.n = n; // stores array count of images so it can be easily accessible with sockets
-        this.img = imgs[n];
+        this.img = imgs[n]; //loadImage("./images/leaf" + (n) + ".png");
         console.log(imgs);
         this.img_h = window.innerHeight * 0.1;
-        this.img_w = imgsWidth[n] * (this.img_h / this.img.height);
+        this.img_w = this.img.width * (this.img_h / this.img.height);
         // this is to save div elements inside the object so that it can be accessed easily
         this.div_cont = document.createElement('div');; // create div for leaf
         this.leaf = document.createElement('img'); // create image
@@ -32,14 +32,13 @@ class FallingObj {
         } else {
             if (this.onme) {
                 this.speed.y = 0;
-                // this.temp = this.speed.x;
                 this.speed.x = 0
             } else {
                 this.speed.y = 1;
                 this.speed.x = this.temp;
             }
         }
-        if (this.loc.x <= this.img_w || this.loc.x >= window.innerWidth - this.img_w) {
+        if (this.loc.x >= window.innerWidth - this.img_w) {
             this.speed.x *= -1;
         }
         this.loc.y += this.speed.y;
@@ -53,7 +52,9 @@ class FallingObj {
     }
     changeCursor = () => {
         if ((mouseX > this.loc.x && mouseX < this.loc.x + this.img_w) && (mouseY > this.loc.y && mouseY < this.loc.y + this.img_h)) {
-            console.log(this.elt);
+            new p5.Element(this.img);
+            // this.img.id('img');
+            console.log(this.img.elt);
 
             cursor('pointer', mouseX, mouseY);
             this.onme = true;

@@ -73,7 +73,11 @@ io.sockets.on("connection", (socket) => {
     ////////////////////////////////////
     // add all open rooms
     if (leaves.length > 0) {
-        socket.emit("prevLeaves", leaves);
+        let data = {
+            leaves: leaves,
+            rooms: rooms
+        }
+        socket.emit("prevLeaves", );
     }
 
     socket.on('newLeaf', (data) => {
@@ -90,6 +94,11 @@ io.sockets.on("connection", (socket) => {
     })
 
     socket.on('hideRoom', (data) => {
+        if (rooms["room" + data.c]) {
+            rooms["room" + data.c]++;
+        } else {
+            rooms["room" + data.c] = 0;
+        }
         io.sockets.emit('hideRoom', data);
     })
 
