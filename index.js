@@ -95,6 +95,7 @@ io.sockets.on("connection", (socket) => {
             speedx: data.speedx
         }
         leaves.push(details);
+        console.log(details);
         io.sockets.emit('newLeaf', details);
     })
 

@@ -62,6 +62,7 @@ class FallingObj {
             if (mouseIsPressed) {
                 if (document.getElementById('username').value) {
                     sessionStorage.setItem('room', this.room);
+                    sessionStorage.setItem('player', "2");
                     window.location = './pacman.html';
                 } else {
                     //add pop up

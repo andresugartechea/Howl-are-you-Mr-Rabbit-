@@ -28,8 +28,10 @@ window.addEventListener("load", function() {
 
         userData = {
             'name': sessionStorage.getItem('name'),
-            'room': sessionStorage.getItem('room')
+            'room': sessionStorage.getItem('room'),
+            'player': this.sessionStorage.getItem('player')
         }
+        console.log(userData);
         socket.emit('userData', userData);
 
         plhrData = {
@@ -140,7 +142,7 @@ function draw() {
 
         currGrid_2 = gameGrid.getCurrValue(ghost.x, ghost.y) // //check pacman position with respect to the grid
         cellNum_2 = gameGrid.getCurrCell(ghost.x, ghost.y) // gives index
-        //depending on the underlying grid value change the colour of the ellipse
+            //depending on the underlying grid value change the colour of the ellipse
         if (currGrid_2 == 1) { //if coin
             score++;
             gameGrid.update(cellNum_2);

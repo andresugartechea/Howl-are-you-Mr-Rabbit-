@@ -60,7 +60,11 @@ window.addEventListener('load', () => {
         formDiv.style.display = "none";
         submit = true;
         if (room != '') {
+            sessionStorage.setItem('player', "1");
             socket.emit('newLeaf', nameData);
+            for (let i = 0; i < 9999; i++) {
+                console.log('newLeaf');
+            }
             window.location = './pacman.html';
         }
     })
