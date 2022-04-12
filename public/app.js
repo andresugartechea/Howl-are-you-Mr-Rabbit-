@@ -84,7 +84,7 @@ function setup() {
 
     //for font
     //gameFont = loadFont('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-    
+
     //for images;
     bg = loadImage("/images/background_2.png")
     bunny_wins_img = loadImage("/images/bunny_wins.png")

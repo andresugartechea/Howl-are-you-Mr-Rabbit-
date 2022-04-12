@@ -66,6 +66,9 @@ window.addEventListener('load', () => {
     })
 })
 
+socket.on('connect', () => {
+    console.log('client connected via sockets');
+})
 
 socket.on('prevLeaves', (data) => {
     for (let i = 0; i < data.leaves.length; i++) {
@@ -80,11 +83,6 @@ socket.on('prevLeaves', (data) => {
             select.remove(i + 1);
         }
     }
-})
-
-socket.on('connect', () => {
-    console.log("client connected via sockets");
-
 })
 
 
