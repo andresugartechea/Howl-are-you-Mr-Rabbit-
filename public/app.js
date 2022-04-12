@@ -199,8 +199,6 @@ function draw() {
     }
 }
 
-
-
 function keyPressed() {
     if (keyCode === RIGHT_ARROW) {
         direction = 1;
