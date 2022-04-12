@@ -4,6 +4,7 @@ class FallingObj {
             x: x,
             y: 0
         }
+        this.room = roomName;
         console.log(this.loc);
         this.name = name;
         this.g = window.innerHeight - window.innerHeight * 0.1; // end of screen +image height
@@ -59,7 +60,12 @@ class FallingObj {
             cursor('pointer', mouseX, mouseY);
             this.onme = true;
             if (mouseIsPressed) {
-                window.location = './pacman.html';
+                if (document.getElementById('username').value) {
+                    sessionStorage.setItem('room', this.room);
+                    window.location = './pacman.html';
+                } else {
+                    //add pop up
+                }
             }
         } else {
             this.onme = false;
