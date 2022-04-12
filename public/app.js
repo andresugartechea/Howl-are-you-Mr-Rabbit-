@@ -143,12 +143,12 @@ function draw() {
         //depending on the underlying grid value change the colour of the ellipse
         if (currGrid_2 == 1) { //if coin
             score++;
-            gameGrid.update(cellNum_2);
+            gameGrid.update2(cellNum_2);
         } else if (currGrid_2 == 3) { //if wall
             wait -= 10;
-            gameGrid.update(cellNum_2);
+            gameGrid.update2(cellNum_2);
         } else if (currGrid == 4) { //if power token
-            gameGrid.update(cellNum_2);
+            gameGrid.update2(cellNum_2);
         }
 
 
