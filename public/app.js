@@ -110,25 +110,26 @@ function setup() {
     time = millis();
 
     //to get the directions (input of KEY ARROWS) from both users
-    // socket.on('allDirData', (data) => {
-    //     coordinates = data;
-    // });
+    socket.on('allDirData', (data) => {
+        coordinates = data;
+    });
 
     socket.on("allPlayersData", (data) => {
             roles = data;
         })
-        //Listen for messages named 'data' from the server
-    socket.on('allDirData', function(obj) {
-        console.log(obj);
-        //update location
-    });
+        //   //Listen for messages named 'data' from the server
+        //  socket.on('allDirData', function(obj) {
+        //   console.log(obj);
+        //  });
 
 }
 
 function draw() {
 
     if (gameState == "start") {
-        //console.log(coordinates);
+
+        direction = coordinates.pl1_dir;
+        direction_pl2 = coordinates.pl2_dir;
 
         background(bg);
         background(255, 255, 0, 100)
@@ -186,19 +187,19 @@ function draw() {
         player_html.innerHTML = "";
 
 
-        //Grab direction
-        let newLocation = {
-            player1: {
-                new_x: pacman.x,
-                new_y: pacman.y,
-            },
-            player2: {
-                new_x: ghost.x,
-                new_y: ghost.y,
-            },
-        };
-        //console.log(newLocation);
-        socket.emit("directionData", newLocation);
+        // //Grab direction
+        // let newLocation = { 
+        //     player1: {
+        //         new_x: pacman.x,
+        //         new_y: pacman.y,
+        //     },
+        //     player2: {
+        //         new_x: ghost.x,
+        //         new_y: ghost.y,
+        //     },
+        // };
+        // //console.log(newLocation);
+        // socket.emit("directionData", newLocation);
 
     }
 
@@ -266,6 +267,14 @@ function keyPressed() {
         } else if ((key === "s") || (key === 'S')) {
             direction_pl2 = 4;
         }
+
+        //Grab direction
+        let newDirection = {
+            pl1_dir: direction,
+            pl2_dir: direction_pl2
+        };
+        //console.log(newLocation);
+        socket.emit("directionData", newDirection);
 
     }
     if (gameState == "instructions") {
