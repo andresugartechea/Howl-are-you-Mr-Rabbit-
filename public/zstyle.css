@@ -61,6 +61,7 @@ body {
     justify-content: space-around;
     align-items: center;
     font-family: 'Orbitron', sans-serif;
+    font-size: 2vh;
 }
 
 .button {
@@ -88,6 +89,7 @@ body {
     /*  */
     width: 20vw;
     font-family: 'Orbitron', sans-serif;
+    font-size: 2vh;
 }
 
 .main_title {
