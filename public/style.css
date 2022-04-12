@@ -9,6 +9,7 @@ body {
 }
 
 .information{
+    font-family: 'Press Start 2P', cursive;
     color: black;
     /* display: flex;
     flex-direction: row; */
