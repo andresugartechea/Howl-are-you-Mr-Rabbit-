@@ -15,6 +15,7 @@ function changeRoomNames() {
     for (let i = 0; i < rooms.length; i++) {
         let n = i % roomNames.length;
         rooms[i].innerHTML = i + " " + roomNames[n];
+        // room value is related to n
     }
 }
 
@@ -78,3 +79,8 @@ socket.on('hideRoom', (c) => {
     let select = document.getElementById('room');
     select.remove(c);
 })
+
+
+
+// text animation
+{ /* <span class="txt-rotate" data-period="2000" data-rotate='[ "Open a new Room to be a rabbit", "or press a new leaf to haunt a rabbit"]'>  in the maze</span> */ }
