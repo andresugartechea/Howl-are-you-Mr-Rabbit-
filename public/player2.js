@@ -1,35 +1,29 @@
-class Player extends Grid{
+class Player2 extends Player{
     constructor(x, y, size, image_name){
-        super(size, rows, cols);
-        this.x = x;
-        this.y = y;
-        this.s = size;
-        this.xspeed = this.s;
-        this.yspeed = this.s;
-
-        this.currPos;
-
-        //for images
+        super(x, y, size, image_name);
         this.image = loadImage(image_name)
+
+        this.pl_x = x;
+        this.pl_y = y;
     }
 
     move(){
-        if (direction == 1){
+        if (direction_pl2 == 1){
             this.x += this.xspeed;
         }
-        else if (direction == 2){
+        else if (direction_pl2 == 2){
             this.y -= this.yspeed;
         }
-        else if (direction == 3){
+        else if (direction_pl2 == 3){
             this.x -= this.xspeed;
         }
-        else if (direction == 4){
+        else if (direction_pl2 == 4){
             this.y += this.yspeed;
         }
     }
 
     checkWall(){
-        this.currPos = this.getCurrValue(this.x, this.y);
+        this.currPos = this.getCurrValue(this.pl_x, this.pl_y);
 
         if (this.x==-this.s){ //left path,pacman goes back in the map on the right
             this.x = width-this.s;
@@ -52,13 +46,5 @@ class Player extends Grid{
             let prev_y = this.y-this.s;
             this.y = prev_y;
         }
-
-    }
-
-
-    display(){
-        this.checkWall();
-        fill(255, 255, 0)
-        image(this.image, this.x-7, this.y-7, this.s+15, this.s+15);
     }
 }
