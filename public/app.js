@@ -20,7 +20,7 @@ window.addEventListener("load", function() {
     coin_html = document.getElementById("information_role");
     player_html = document.getElementById("information_coins");
 
-    gameState = "start";
+    gameState = "instructions";
 
     //waits for socket to connect
     socket.on("connect", () => {
@@ -63,6 +63,7 @@ let wait = 300;
 
 //for images
 let bg;
+let instructions_img;
 let carrot_img;
 let apple_img;
 let tree_img;
@@ -75,7 +76,7 @@ let wolf_wins_img;
 let roles;
 
 //for the fonts
-//let gameFont;
+let gameFont;
 
 //Display P5 Canva
 function setup() {
@@ -83,10 +84,12 @@ function setup() {
     background(0);
 
     //for font
-    //gameFont = loadFont('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    gameFont = loadFont("fonts/superMarioFont.ttf");
+    textFont(gameFont);
 
     //for images;
     bg = loadImage("/images/background_2.png")
+    instructions_img = loadImage("/images/instructions.png")
     bunny_wins_img = loadImage("/images/bunny_wins.png")
     wolf_wins_img = loadImage("/images/wolf_wins.png")
 
@@ -107,7 +110,7 @@ function setup() {
 
     // //to get the directions (input of KEY ARROWS) from both users
     socket.on('allDirData', (data) => {
-        direction = data.direction;
+        console.log(data);
         //drawPos(obj);
     });
 
@@ -125,6 +128,7 @@ function draw() {
         background(bg);
         background(255, 255, 0, 100)
         gameGrid.draw(); //draw the grid
+
 
 
         if (millis() - time >= wait) {
@@ -165,7 +169,6 @@ function draw() {
             gameGrid.update2(cellNum_2);
         }
 
-
         if (score == gameGrid.toWin) {
             gameState = "win";
         }
@@ -179,7 +182,21 @@ function draw() {
 
     }
 
-    if (gameState == "win") {
+    //other gameStates
+    if (gameState == "instructions") {
+        image(instructions_img, 0, 0, width, height); 
+        fill(255);
+        textSize(20)
+        text("KEY ARROWS TO MOVE", 139, 266)
+        fill(204, 255, 204);
+        textSize(15);
+        text("Wolf, touching the apples will make them inedible.", 33, 400, 240, 240);
+        text("Don't touch too many apples or your prey will run away!", 33, 470, 240, 240);
+        text("Bunny, it's time for lunch! Eat all the apples before the Wolf arrives.", 394, 314, 220, 240);
+        text("Your favorite! Eat a carrot to gain some speed.", 394, 446, 220, 240);
+        fill(255);
+        text("Press any key to continue", 139, 577)
+    } else if (gameState == "win") {
         background(255);
         image(bunny_wins_img, 0, 0, width, height);
         fill(0);
@@ -202,32 +219,47 @@ function draw() {
 
 
 function keyPressed() {
-    if (keyCode === RIGHT_ARROW) {
-        direction = 1;
-    } else if (keyCode === UP_ARROW) {
-        direction = 2;
-    } else if (keyCode === LEFT_ARROW) {
-        direction = 3;
-    } else if (keyCode === DOWN_ARROW) {
-        direction = 4;
+    if (gameState == "start"){
+        if (keyCode === RIGHT_ARROW) {
+            direction = 1;
+        } else if (keyCode === UP_ARROW) {
+            direction = 2;
+        } else if (keyCode === LEFT_ARROW) {
+            direction = 3;
+        } else if (keyCode === DOWN_ARROW) {
+            direction = 4;
+        }
+    
+        if (key === 'd') {
+            direction_pl2 = 1;
+        } else if (key === "w") {
+            direction_pl2 = 2;
+        } else if (key === "a") {
+            direction_pl2 = 3;
+        } else if (key === "s") {
+            direction_pl2 = 4;
+        }
+    
+    
+        //Grab direction
+        let newLocation = { 
+            player1: {
+                new_x: pacman.x,
+                new_y: pacman.y,
+            },
+            player2: {
+                new_x: ghost.x,
+                new_y: ghost.y,
+            },
+        };
+    
+        console.log(newLocation);
+        socket.emit("directionData", newLocation);
+    } 
+    if (gameState == "instructions"){
+        if (key === " "){
+            gameState = "start";
+        }
     }
-
-    if (key === 'd') {
-        direction_pl2 = 1;
-    } else if (key === "w") {
-        direction_pl2 = 2;
-    } else if (key === "a") {
-        direction_pl2 = 3;
-    } else if (key === "s") {
-        direction_pl2 = 4;
-    }
-
-
-
-    //Grab direction
-    let newDirection = { direction: direction };
-
-    // console.log(newDirection);
-    socket.emit("directionData", newDirection);
 
 }
