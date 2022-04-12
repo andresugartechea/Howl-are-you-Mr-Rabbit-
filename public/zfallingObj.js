@@ -58,16 +58,12 @@ class FallingObj {
             this.onme = true;
             if (mouseIsPressed) {
                 if (document.getElementById('username').value) {
-                    console.log(".", this.room, sessionStorage.getItem('player'), sessionStorage.getItem('name'));
-                    if (!sessionStorage.getItem('player')) {
-                        sessionStorage.setItem('player', "2");
-                        sessionStorage.setItem('room', this.room);
-                        // window.location = './pacman.html';
-                    } else {
+                    // console.log(".", this.room, sessionStorage.getItem('player'), sessionStorage.getItem('name'));
 
-                        // window.location = './pacman.html';
-                    }
-                    window.location = 'pacman.html';
+                    sessionStorage.setItem('player', "2");
+                    sessionStorage.setItem('room', this.room);
+                    window.location = './pacman.html';
+
 
                 } else {
                     //add pop up

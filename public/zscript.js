@@ -1,7 +1,6 @@
 let socket = io();
 let submit = false;
 let leavesObj = [];
-let openedRooms = [];
 let nameData;
 let n = 0;
 let roomNames = ["buggs Bunny",
@@ -9,18 +8,34 @@ let roomNames = ["buggs Bunny",
     "carrot",
     "trees"
 ];
-
-function changeRoomNames() {
-    let rooms = document.getElementsByClassName('options');
-    for (let i = 0; i < rooms.length; i++) {
-        let n = i % roomNames.length;
-        rooms[i].innerHTML = i + " " + roomNames[n];
-        // room value is related to n
-    }
-}
+let create0_join1 = 0;
 
 window.addEventListener('load', () => {
-    changeRoomNames();
+    // buttons
+    document.getElementById('joinn').addEventListener('click', () => {
+        if (leavesObj.length > 0) {
+            document.getElementById("join_form_div").style.display = "none";
+            document.getElementById("main_form_div").style.display = "block";
+            create0_join1 = 1;
+        } else {
+            document.getElementById("join_form_div").style.display = "none";
+            document.getElementById("joinerror").style.display = "block";
+            document.getElementById("main_form_div").style.display = "block";
+            document.getElementById("room").style.display = "block";
+            create0_join1 = 0;
+        }
+
+    })
+    document.getElementById('create').addEventListener('click', () => {
+        document.getElementById("join_form_div").style.display = "none";
+        document.getElementById("main_form_div").style.display = "block";
+        document.getElementById("room").style.display = "block";
+        create0_join1 = 0;
+    })
+
+
+
+
     let nameForm = document.getElementById('main_form');
     let formDiv = document.getElementById('main_form_div');
     let username;
@@ -31,17 +46,22 @@ window.addEventListener('load', () => {
     nameForm.addEventListener('submit', (e) => {
         socket.emit('load');
         e.preventDefault();
-        username = document.getElementById('username').value;
-        room = document.getElementById('room').value;
-        item = document.getElementById('room');
-        let hideData = {
-            c: item.selectedIndex - 1,
-        }
-        socket.emit('hideRoom', hideData);
-        sessionStorage.setItem('name', username);
-        sessionStorage.setItem('room', room);
-        if (room != '') {
-            console.log("player1");
+        if (create0_join1) {
+            username = document.getElementById('username').value;
+            sessionStorage.setItem('player', "2");
+            sessionStorage.setItem('name', username);
+
+            document.getElementById('main_instructions').style.display = "block";
+            // write click on room leaf to join
+        } else {
+            username = document.getElementById('username').value;
+            room = document.getElementById('room').value;
+            let hideData = {
+                room: room
+            }
+            socket.emit('hideRoom', hideData);
+            sessionStorage.setItem('name', username);
+            sessionStorage.setItem('room', room);
             sessionStorage.setItem('player', "1");
             nameData = {
                 name: username,
@@ -51,18 +71,10 @@ window.addEventListener('load', () => {
                 speedx: Math.random(-0.5, 0.5)
             }
             socket.emit('newLeaf', nameData);
-            leavesObj[leavesObj.length - 1].movePakman();
-            for (let i = 0; i < 9; i++) {
-                console.log('newLeaf');
-            }
-
-            // window.location = './pacman.html';
         }
 
-        // sessionStorage.
-        // nameForm.reset();
-        document.getElementById('main_instructions').style.marginBottom = "15vh";
-        formDiv.style.display = "none";
+        document.getElementById("join_form_div").style.display = "none";
+        document.getElementById("main_form_div").style.display = "none";
         submit = true;
     })
 })
@@ -87,8 +99,13 @@ socket.on('prevLeaves', (data) => {
     }
 })
 
+socket.on('leafSuccess', () => {
+    window.location = './pacman.html';
+})
+
 
 socket.on('newLeaf', (data) => {
+
     leavesObj.push(new FallingObj(data.name, data.room, data.x, data.n, data.speedx, ++data.player));
 })
 

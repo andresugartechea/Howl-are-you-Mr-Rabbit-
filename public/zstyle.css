@@ -46,12 +46,31 @@ body {
     /* z-index: 4; */
 }
 
-.main_form {
-    height: min-content;
+.join_form_div {
+    height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+}
+
+.join_form {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.button {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: antiquewhite;
+    height: 6vh;
+    width: 20vh;
+    border-radius: 3vh;
+    padding: 1vh;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .main_form_text {
@@ -68,6 +87,7 @@ body {
     text-align: center;
     /*  */
     width: 20vw;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .main_title {

@@ -33,7 +33,8 @@ io.sockets.on("connection", (socket) => {
         socket.name = data.name;
         users[socket.name] = socket.id;
 
-        socket.roomname = "room2"; //data.room;
+        socket.roomname = data.room; //data.room;
+
 
         //to limit the number of people in each room 
         if (rooms[data.room] < MAX_USERS) {
@@ -88,21 +89,15 @@ io.sockets.on("connection", (socket) => {
     socket.on('newLeaf', (data) => {
         // add leaf data to leaves
         console.log("this", data);
-        // let details = {
-        //     name: data.name,
-        //     room: data.room,
-        //     x: data.x,
-        //     n: data.n,
-        //     speedx: data.speedx
-        // }
         leaves.push(data);
         io.sockets.emit('newLeaf', data);
+        socket.emit('leafSuccess');
     })
     socket.on('hideRoom', (data) => {
-        if (rooms["room" + (data.c)]) {
-            rooms["room" + (data.c)]++;
+        if (rooms[data.room]) {
+            rooms[data.room]++;
         } else {
-            rooms["room" + (data.c)] = 1;
+            rooms[data.room] = 1;
         }
         io.sockets.emit('hideRoom', data);
     })
