@@ -33,7 +33,7 @@ io.sockets.on("connection", (socket) => {
         socket.name = data.name;
         users[socket.name] = socket.id;
 
-        socket.roomname = data.room;
+        socket.roomname = "room2"; //data.room;
 
         //to limit the number of people in each room 
         if (rooms[data.room] < MAX_USERS) {
