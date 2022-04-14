@@ -26,6 +26,12 @@ window.addEventListener("load", function() {
     socket.on("connect", () => {
         console.log("Connected to the server via sockets");
 
+        socket.on('allDirData', function(obj) {
+            // changeDirection(obj);
+            direction = obj.pl1_dir;
+            direction_pl2 = obj.pl2_dir;
+        });
+
         userData = {
             'name': sessionStorage.getItem('name'),
             'room': sessionStorage.getItem('room'),
@@ -109,19 +115,18 @@ function setup() {
 
     time = millis();
 
-    //to get the directions (input of KEY ARROWS) from both users
-    socket.on('allDirData', (data) => {
-        coordinates = data;
-        console.log('bla');
-    });
+    // //to get the directions (input of KEY ARROWS) from both users
+    // socket.on('allDirData', (data) => {
+    //     coordinates = data;
+    // });
 
     socket.on("allPlayersData", (data) => {
-            roles = data;
-        })
-        //   //Listen for messages named 'data' from the server
-        //  socket.on('allDirData', function(obj) {
-        //   console.log(obj);
-        //  });
+        roles = data;
+    })
+
+    //  socket.on('allDirData', function(obj) {
+    //   changeDirection(obj);
+    // });
 
 }
 
@@ -129,8 +134,8 @@ function draw() {
 
     if (gameState == "start") {
 
-        direction = coordinates.pl1_dir;
-        direction_pl2 = coordinates.pl2_dir;
+        // direction = coordinates.pl1_dir;
+        // direction_pl2 = coordinates.pl2_dir;
 
         background(bg);
         background(255, 255, 0, 100)
@@ -285,3 +290,9 @@ function keyPressed() {
     }
 
 }
+
+// function changeDirection(obj){
+//     direction = obj.pl1_dir;
+//     direction_pl2 = obj.pl2_dir;
+//     console.log(obj.pl1_dir)
+// }
