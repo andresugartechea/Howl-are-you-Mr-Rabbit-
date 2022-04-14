@@ -11,10 +11,9 @@
 Our final website consisted of two parts:
 - An entry page with animations and a new user interface to joining and creating rooms.
 - The Pakman game using the created rooms
-Most websites with rooms, u just use have an average landing page that looks something like this:
-<img src=“./images/fatema/image1.png” style=“width:300px”>
+Most websites with rooms, u just use have an average landing page that looks something like a simple input page.
 
-Our goal was to create a landing page that is more interesting and creative to the user, a page that adds to the their experience and for them to have a little bit more fun in our website beyond the pacman game.
+Hence, our goal was to create a landing page that is more interesting and creative to the user, a page that adds to the their experience and for them to have a little bit more fun in our website beyond the pacman game.
 
 ## Next Steps:
 > Ps. I am still not sure about, ifs and whens of these ideas, but these were things we had discussed. Incase we decide to go further this is what we plan on adding.
