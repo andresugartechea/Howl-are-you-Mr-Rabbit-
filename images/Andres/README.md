@@ -28,11 +28,11 @@ Before starting coding, I followed my professor’s advice and wrote down all th
 
 <img src="firstconcept_2.png" width ="500" /> 
 
-#### Summary of steps followed in the code: 
-
-1. 
-
 ## Major problems and solutions: 
+
+Academically speaking, my goal with this project was to push myself out of my comfort zone and code something that I usually struggle with, which is a videogame. I knew this would be challenging, so I list here the main issues I faced and how I overcame them:
+
+1. I encountered multiple challenges in this project that pushed me to gain more coding skills and reinforced the ones I learned in class. For instance, in the first version of my work I had used a lot of iterations (‘for’ loops) and this was inefficient for collision detection. In this regard, my professor recommended me to use [her example of a Grid class](https://editor.p5js.org/itp42/sketches/dBeLZC8mm) that she had previously coded. Studying her code unblocked a logic that I hadn’t used before in my previous assignments.
 
 ## Final result: 
 
