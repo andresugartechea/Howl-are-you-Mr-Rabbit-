@@ -10,10 +10,16 @@ My first draft idea was to develop my own version of Skribbl, which is an online
 
 In the beginning, I was working on my own but I started collaborating with Fatema Nassar when we realized that our creative concepts could go along very well. Her animations of leaves falling down gave the forest theme of this game and gave birth to “Howl Are You Mr. Rabbirt?”. 
 
-
-In our version, the role of Pacman is represented by a bunny and the ghost by a wolf.
-
 <img src="bunny.png" width ="100" /> <img src="wolf.jpg" width ="100" /> 
+
+In our unified version, the role of Pacman is represented by a bunny and the ghost by a wolf.
+
+#### Wireframe and final concept:
+
 
 
 <img src="firstconcept_2.png" width ="500" /> 
+
+<img src="wireframe.png" width ="500" />
+
+<img src="wireframe1.png" width ="500" /> 
