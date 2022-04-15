@@ -46,17 +46,19 @@ When I started working with Andres, we wanted to have a similar theme to both pa
 I also pixelated the leaves I had, and now that I look at it I think it may have used a little bit more pixelation (larger shapes for pixels).
 Then i decided to keep my idea of the game but with his game instead.
 First background Image looked like this:
-<img src=“./images/fatema/image2.png” style=“width:300px”>
+<img src='images/fatema/image1.png' style=“width:300px”>
 Final result:
-<img src=“./images/fatema/image3.png” style=“width:300px”>
+<img src='images/fatema/image5.jpg' style=“width:300px”>
 
 #### Wireframe and concept:
 For the wire frame, I did not change much throughout the process. 
+My initial wire frame was the same all along so I will just show the current images with position.
 
-Here is my initial wire frame:
-<img src=“./images/fatema/image4.png” style=“width:300px”>
-<img src=“./images/fatema/image5.png” style=“width:300px”>
-<img src=“./images/fatema/image6.png” style=“width:300px”>
+<img src='./images/fatema/image4.jpg' style=“width:300px”>
+and how it is organised now:
+<img src='./images/fatema/image3.jpg' style=“width:300px”>
+and with one leaf falling
+<img src='./images/fatema/image4.jpg' style=“width:300px”>
 
 ### Major challenges and solutions:
 1. My main challenge was time. I had thought initially that I can finish so much more than what I could’ve in the time that we had, that’s why working with Andres helped both of us a lot, as it helped me with what i couldn’t finish and him with finding and creating a new theme that was not copying anyone or anything but his own thought process.
