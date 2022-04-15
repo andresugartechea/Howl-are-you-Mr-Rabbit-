@@ -24,7 +24,7 @@ The concept for this page, as a mention before, was to give a Pacman-inspired at
 
 <img src="wireframe1.png" height ="700" /> 
 
-Before starting coding, I followed my professor’s advice and wrote down all the steps I would need to follow for this project. There was some obstacles that I encountered in the process, but this development allowed me to know in what direction my part of the project was going.
+Before starting coding, I followed my professor’s advice and wrote down all the steps I would need to follow for this project. There was some obstacles that I encountered in the process, but this method allowed me to know in what direction my part of the project was going. At the end, I couldn’t respect all the points from the list, but I kept those that were essential for the user’s experience and I think it’s something that motivates me to keep working in this project in the future.
 
 <img src="firstconcept_2.png" width ="500" /> 
 
