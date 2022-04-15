@@ -20,4 +20,4 @@ In our unified version, the role of Pacman is represented by a bunny and the gho
 
 <img src="firstconcept_2.png" width ="500" /> 
 
-<img src="wireframe.png" height ="500" /> <img src="wireframe1.png" height ="500" /> 
+<img src="wireframe.png" height ="700" /> <img src="wireframe1.png" height ="700" /> 
