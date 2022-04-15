@@ -28,7 +28,9 @@ Before starting coding, I followed my professor’s advice and wrote down all th
 
 <img src="firstconcept_2.png" width ="500" /> 
 
-#### Summary of steps followed: 
+#### Summary of steps followed in the code: 
+
+1. 
 
 ## Major problems and solutions: 
 
