@@ -1,5 +1,5 @@
-# Howl Are You, Mr. Rabbit? 
-# Documentation
+# Documentation | Howl Are You, Mr. Rabbit? 
+
 [_Code Link_](https://github.com/andresugartechea/Project2.git)</br>
 [_Website Link_](https://howl-are-you-mr-rabbit.glitch.me)
 
