@@ -1,6 +1,9 @@
+// This code is based on the following Grid example: https://editor.p5js.org/itp42/sketches/dBeLZC8mm
+
+
 class Grid {
     constructor(size, rows, cols, img_1) {
-      //you can create an actual grid with 0s and 1s and 2s and so on
+      //the numbers indicate the values of the cells: 0 - empty cells, 1 - for apples, 2 - walls/inaccessible cells, 3 - carrots, 4 - rotten/grey apples
       this.grid = `
         222222222222222222222222222222
         231111111111132231111111111132
@@ -33,48 +36,54 @@ class Grid {
         231111111111111111111111111132
         222222222222222222222222222222
         `;
-      this.grid = this.grid.replace(/\s/g, ""); // IMP : This step removes all the whitespaces in the grid.
+      this.grid = this.grid.replace(/\s/g, ""); // this line removes the spaces in the string
       this.size = size;
       this.rows = rows;
       this.cols = cols;
-      this.currVal = 0;
-      this.toWin = (this.grid.match(/1/g) || []).length;
 
-      //textures;
+      //my variables
+      this.currVal = 0; //value where the bunny starts
+      this.toWin = (this.grid.match(/1/g) || []).length; //counts all the apples to check how many are left to eat
+
+      //images for textures;
       this.carrot = loadImage("images/carrot.png")
       this.apple = loadImage("images/apple.png")
       this.g_apple = loadImage("images/apple2.png")
       this.tree = loadImage("images/tree.png")
 
+
+      //to change transparency
       this.transparency = 40;
 
     }
   
-    update(gridIndex){
+    update(gridIndex){ //this function is called when the rabbit eats an apple, so the cell is replaced by an empty one
        this.grid = split(this.grid,""); //to convert into an array
        this.grid[gridIndex] = 0;
        this.grid = join(this.grid, ""); //to convert back into a string
     }
 
-    update2(gridIndex2){
+    update2(gridIndex2){ //this function is called when the wolf eats an apple, so the cell is replaced by a rotten apple
       this.grid = split(this.grid,""); //to convert into an array
       this.grid[gridIndex2] = 4;
       this.grid = join(this.grid, ""); //to convert back into a string
    }
 
     draw() {
-      //each number in your grid can be a particular element or colour - depends on your game logic
-      //loop through the rows and columns and find the grid value at that position in the array
+
+      //we update the grid based on user input
       this.update();
       this.update2();
 
-      //console.log(gridArray);
+
+      //iterate through the values in this.grid and this.update(). The values are replaced by images and rectangles.
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.cols; j++) {
-          //get the grid value
-          let gridVal = this.grid[j * this.rows + i];
-          // depending on the value, you can give it the appropriate colour/shape/image
 
+          //to get the grid value
+          let gridVal = this.grid[j * this.rows + i];
+
+          //cell is filled depending on gridVal
           if (gridVal == 0) { //empty cell
             fill(255,255,0, this.transparency);
             rect(i * this.size, j * this.size, this.size, this.size);
@@ -82,15 +91,10 @@ class Grid {
           } else if (gridVal == 1) { //to draw apples
             noStroke();
             noFill();
-            //fill(255,255,0, this.transparency);
             rect(i * this.size, j * this.size, this.size, this.size);
-            
-            fill(255, 255, 0);
             image(this.apple, i * this.size+3, j * this.size+3, this.size-7, this.size-7);
-            //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/3, this.size/3);
 
-          }else if (gridVal == 2) {
-            //to draw wall
+          }else if (gridVal == 2) { //to draw the walls/trees
             noFill();
             fill(0,0,255);
             image(this.tree, i * this.size-7, j * this.size-3, this.size+10, this.size+10);
@@ -98,33 +102,27 @@ class Grid {
           }else if (gridVal == 3) { //to draw carrot
             noStroke();
             noFill();
-            //fill(255,255,0, this.transparency);
             rect(i * this.size, j * this.size, this.size, this.size);
-            //to draw power coins
-            fill(0, 255, 0);
             image(this.carrot, i * this.size, j * this.size, this.size+3, this.size+3);
-            //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
 
-          }else if (gridVal == 4){ //black apple
+          }else if (gridVal == 4){ //rottem apple
             noFill();
             image(this.g_apple, i * this.size+3, j * this.size+3, this.size-7, this.size-7);
-            //to draw power coins
-            //fill(255,0,255);
-            //ellipse(i * this.size+(this.size/2), j * this.size+(this.size/2), this.size/2, this.size/2);
+
           }
         }
       }
     }
 
-  // this function is the most important! Given an x and a y it gives you the grid value at that position. Knowing the grid value you can decide what should happen to your player etc.
-
+    //this gives the value of the cell where the player is
     getCurrValue(x, y) {
         let gridX = floor(x / this.size);
         let gridY = floor(y / this.size);
        // print(gridX, gridY); 
-        return this.grid[gridY* this.cols + gridX]; //this returns gridValue
-      }
+        return this.grid[gridY* this.cols + gridX];
+    }
 
+    //this gives the index of the cell where the player is
     getCurrCell(x, y){
         let gridX = floor(x / this.size);
         let gridY = floor(y / this.size);

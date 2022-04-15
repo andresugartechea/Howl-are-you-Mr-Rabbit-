@@ -9,11 +9,22 @@ app.use('/', express.static("public"));
 //To start HTTP server
 let http = require("http");
 let server = http.createServer(app); //
+const { instrument } = require("@socket.io/admin-ui");
 let port = process.env.PORT || 8000;
 
 //To start connection with socket.io
 let io = require("socket.io");
-io = new io.Server(server);
+io = new io.Server(server,  {
+    cors: {
+      origin: ["https://admin.socket.io"],
+      credentials: true
+    }
+});
+
+instrument(io, {
+    auth: false
+});
+
 
 
 //To limit the amount of people in each room

@@ -102,7 +102,6 @@ function setup() {
 
 
     canvas = createCanvas(600, 600);
-    //canvas.position(windowWidth/3.5, windowHeight/10);
     canvas.style('z-index', '-1');
 
     score = 0;
