@@ -5,7 +5,7 @@
 
 ## I | Description: 
 
-“Howl Are You, Mr. Rabbit?” is a two-player online game displayed on a website inspired by the Pacman and the traditional game of tag. The user enters the website to see a portal where they can create a new room to start a match with another player and enter a username of their choice or join a room created by someone else by clicking on a leaf. The user enters the room to see the instructions for the game and start playing. They have the option to be either a wolf, who needs to hunt the rabbit before it eats all the food in the forest, or be the rabbit that needs to escape from the wolf. 
+_“Howl Are You, Mr. Rabbit?”_ is a two-player online game displayed on a website inspired by the Pacman and the traditional game of tag. The user enters the website to see a portal where they can create a new room to start a match with another player and enter a username of their choice or join a room created by someone else by clicking on a leaf. The user enters the room to see the instructions for the game and start playing. They have the option to be either a wolf, who needs to hunt the rabbit before it eats all the food in the forest, or be the rabbit that needs to escape from the wolf. 
 
 ## II | Final idea inspiration:
 
@@ -35,6 +35,4 @@ To fix the bugs in each other’s part of the project (we will detail this point
 
 [Andres'](https://github.com/andresugartechea/Project2/blob/main/images/Andres/README.md)
 
-## The Unified Final Result
-> (aka. masterpiece even if it does not work as we had hoped.)
-In the beginning, I was working on my own but I started collaborating with Fatema Nassar when we realized that our creative concepts could go along very well. Her animations of leaves falling down gave the forest theme of this game and gave birth to “HAYMR?”. 
+## The Unified Final Result (A.K.A our masterpiece, even if it doesn't work as we had hoped):
