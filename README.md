@@ -16,18 +16,17 @@ The innovative factor of our idea focuses on the user interface. From the landin
 
 
 ### A - Expansion Ideas: 
-
-·More games for the user to play: the user could choose a game to play after they create a room. Ideas of games that would be interesting for the user could be Skribble, Snake, Tetris, etc.
-·To polish the user interface: make our website more intuitive, such as to show game name with each leaf if we implement the previous point.
-·To give homogeneity to our design: we would work on a design that is similar on each page that resembles old indie games with modern aesthetics.
+- More games for the user to play: the user could choose a game to play after they create a room. Ideas of games that would be interesting for the user could be Skribble, Snake, Tetris, etc.
+- To polish the user interface: make our website more intuitive, such as to show game name with each leaf if we implement the previous point.
+- To give homogeneity to our design: we would work on a design that is similar on each page that resembles old indie games with modern aesthetics.
 
 
 ### B - Technical ideas:
-·To implement namespaces to expand our Socket.io skills.
-·To ameliorate our current socket connections. 
-·To add more details on the game screen about different users, so it gives a more personalized experience.
-·To make the game more intuitive with the design, so the instructions for the game are not necessary in the beginning of each match.
-·To fix the bugs in each other’s part of the project (we will detail this point in our personal documentation).
+- To implement namespaces to expand our Socket.io skills.
+- To ameliorate our current socket connections. 
+- To add more details on the game screen about different users, so it gives a more personalized experience.
+- To make the game more intuitive with the design, so the instructions for the game are not necessary in the beginning of each match.
+- To fix the bugs in each other’s part of the project (we will detail this point in our personal documentation).
 
 ## Personal documentation: 
 
