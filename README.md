@@ -3,28 +3,34 @@
 [_Code Link_](https://github.com/andresugartechea/Project2.git)</br>
 [_Website Link_](https://howl-are-you-mr-rabbit.glitch.me)
 
-## Description: 
+## I | Description: 
 
 “Howl Are You, Mr. Rabbit?” is a two-player online game displayed on a website inspired by the Pacman and the traditional game of tag. The user enters the website to see a portal where they can create a new room to start a match with another player and enter a username of their choice or join a room created by someone else by clicking on a leaf. The user enters the room to see the instructions for the game and start playing. They have the option to be either a wolf, who needs to hunt the rabbit before it eats all the food in the forest, or be the rabbit that needs to escape from the wolf. 
 
-## Final idea inspiration:
+## II | Final idea inspiration:
+
 Our final website consisted of two parts:
-- An entry page with animations and a new user interface to joining and creating rooms.
-- The Pakman game using the created rooms
-Most websites with rooms, u just use have an average landing page that looks something like a simple input page.
+- An entry page with animations and a new user interface to join and create rooms.
+- The rooms displaying the videogame to start a new match,
+The innovative factor of our idea focuses on the user interface. From the landing page, our website allows fun interactions that differentiate it from average input pages for videogames. We’re sure that this concept offers an interesting experience beyond playing a Pacman-inspired videogame.
 
-Hence, our goal was to create a landing page that is more interesting and creative to the user, a page that adds to the their experience and for them to have a little bit more fun in our website beyond the pacman game.
 
-## Next Steps:
-> Ps. I am still not sure about, ifs and whens of these ideas, but these were things we had discussed. Incase we decide to go further this is what we plan on adding.
-### expansion Ideas: 
-1. More games for the user to play. This would use name spaces and randomly choose a game for the user the second they “create a room”. Games would be like skribble, *initial game idea*, snake, and …etc.
-2. Work on the interface, maybe show the game name next to each leaf.
-3. Work on a design that is all similar, pixilated, kinda like an old game vibe in a modern world.
-### Technical ideas:
-- Work on socket connections
-- Add more details on game screen about different users
-- Give the user more intuitively and less instructions for the game.\
+### A - Expansion Ideas: 
+
+More games for the user to play: the user could choose a game to play after they create a room. Ideas of games that would be interesting for the user could be Skribble, Snake, Tetris, etc.
+To polish the user interface: make our website more intuitive, such as to show game name with each leaf if we implement the previous point.
+To give homogeneity to our design: we would work on a design that is similar on each page that resembles old indie games with modern aesthetics.
+
+
+### B - Technical ideas:
+To implement namespaces to expand our Socket.io skills.
+To ameliorate our current socket connections. 
+To add more details on the game screen about different users, so it gives a more personalized experience.
+To make the game more intuitive with the design, so the instructions for the game are not necessary in the beginning of each match.
+To fix the bugs in each other’s part of the project (we will detail this point in our personal documentation).
+
+## Personal documentation: 
+
 
 ## Fatema
 
