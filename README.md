@@ -31,8 +31,8 @@ To fix the bugs in each other’s part of the project (we will detail this point
 
 ## Personal documentation: 
 
-[Fatema's](https://github.com/andresugartechea/Project2/blob/main/images/fatema/README.md)
+[_Fatema's_](https://github.com/andresugartechea/Project2/blob/main/images/fatema/README.md)
 
-[Andres'](https://github.com/andresugartechea/Project2/blob/main/images/Andres/README.md)
+[_Andres'_](https://github.com/andresugartechea/Project2/blob/main/images/Andres/README.md)
 
 ## The Unified Final Result (A.K.A our masterpiece, even if it doesn't work as we had hoped):
