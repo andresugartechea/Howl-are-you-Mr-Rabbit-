@@ -16,8 +16,15 @@ In our unified version, the role of Pacman is represented by a bunny and the gho
 
 ### B - Wireframe and followed steps:
 
+For my part of the project, which is the second page showing the videogame, I followed this wireframe:
 
-<img src="wireframe.png" height ="700" /> <img src="wireframe1.png" height ="700" /> 
+<img src="wireframe.png" height ="700" /> 
+
+The concept for this page, as a mention before, was to give a Pacman-inspired atmosphere to the videogame that homogenizes with the landing page. After testing different designs, this is the one that my partner and I decided to keep:
+
+<img src="wireframe1.png" height ="700" /> 
+
+Before starting coding, I followed my professor’s advice and wrote down all the steps I would need to follow for this project. There was some obstacles that I encountered in the process, but this development allowed me to know in what direction my part of the project was going.
 
 <img src="firstconcept_2.png" width ="500" /> 
 
