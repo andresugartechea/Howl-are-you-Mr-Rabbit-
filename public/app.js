@@ -14,6 +14,7 @@ let gameState;
 playerList = [];
 let userData;
 
+// 
 //Waits for page to load
 window.addEventListener("load", function() {
 
