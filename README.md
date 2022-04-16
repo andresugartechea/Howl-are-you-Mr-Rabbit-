@@ -11,8 +11,7 @@ _“Howl Are You, Mr. Rabbit?”_ is a two-player online game displayed on a web
 
 Our final website consisted of two parts:
 - An entry page with animations and a new user interface to join and create rooms.
-- The rooms displaying the videogame to start a new match,
-The innovative factor of our idea focuses on the user interface. From the landing page, our website allows fun interactions that differentiate it from average input pages for videogames. We’re sure that this concept offers an interesting experience beyond playing a Pacman-inspired videogame.
+- The rooms displaying the videogame to start a new match: the innovative factor of our idea focuses on the user interface. From the landing page, our website allows fun interactions that differentiate it from average input pages for videogames. We’re sure that this concept offers an interesting experience beyond playing a Pacman-inspired videogame.
 
 
 ### A - Expansion Ideas: 
