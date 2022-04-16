@@ -104,6 +104,8 @@ window.addEventListener("load", function() {
 ```
 Unfortunately, as mentioned on the code comments, we were not able to send the data from one user to another. The interesting thing we noticed was that the data would only appear on the console after refreshing the page, but not right after the user joins the room as we wanted. In addition, by testing in a different browser (Mozilla Firefox) we got the information of the user and the name of the room displayed on the console, but we didn’t get to see the coordinates of the players.
 
+<img src="proof.png" width ="700" /> 
+
 ## Final result: 
 
 [You can see how our website looks like here](https://howl-are-you-mr-rabbit.glitch.me/)
