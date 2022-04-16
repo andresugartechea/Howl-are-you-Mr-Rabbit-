@@ -105,7 +105,7 @@ class Grid {
             rect(i * this.size, j * this.size, this.size, this.size);
             image(this.carrot, i * this.size, j * this.size, this.size+3, this.size+3);
 
-          }else if (gridVal == 4){ //rottem apple
+          }else if (gridVal == 4){ //rotten apple
             noFill();
             image(this.g_apple, i * this.size+3, j * this.size+3, this.size-7, this.size-7);
 

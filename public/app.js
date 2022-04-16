@@ -14,33 +14,36 @@ let gameState;
 playerList = [];
 let userData;
 
-// 
 //Waits for page to load
 window.addEventListener("load", function() {
 
-    coin_html = document.getElementById("information_role");
-    player_html = document.getElementById("information_coins");
+    //for the html
+    coin_html = document.getElementById("information_role"); //here, I displayed the information about the apples that the bunny needs to eat to win
+    player_html = document.getElementById("information_coins"); //here, I send the infomation about the user (this is something that I couldn't implement, since my room was not receiving from the server the data)
 
+    //the game starts displaying the instructions
     gameState = "instructions";
 
-    //waits for socket to connect
+    //connecting with sockets
     socket.on("connect", () => {
-        console.log("Connected to the server via sockets");
+        console.log("Connected to the server via sockets"); //to confirm connection on console
 
+        //after connection, the user receives the data about the other user's input (the coordinates of their characters). (Same note: the data didn't fetch correctly and I couldn't communicate it to all the users)
         socket.on('allDirData', function(obj) {
-            // changeDirection(obj);
             direction = obj.pl1_dir;
             direction_pl2 = obj.pl2_dir;
         });
 
+        //this sends data about the username and the room chosen on the landing page. For some reason this would also be sent after refreshing the game page, but not right after joining the room.
         userData = {
             'name': sessionStorage.getItem('name'),
             'room': sessionStorage.getItem('room'),
             'player': this.sessionStorage.getItem('player')
         }
-        console.log(userData);
+        //console.log(userData); to test if we were receiving the data correctly (which was not the case)
         socket.emit('userData', userData);
 
+        //to create a list of player with their socket.id's
         plhrData = {
             'player': socket.id
         }
@@ -101,31 +104,28 @@ function setup() {
     bunny_wins_img = loadImage("/images/bunny_wins.png")
     wolf_wins_img = loadImage("/images/wolf_wins.png")
 
-
+    //to create and position canvas on page
     canvas = createCanvas(600, 600);
     canvas.style('z-index', '-1');
 
+    //other variables
     score = 0;
     size = width / rows;
-
-    gameGrid = new Grid(size, rows, cols); //create a new Grid object
-
-    pacman = new Player(14 * size, 22 * size, size, "/images/bunny.png");
-    ghost = new Player2(14 * size, 14 * size, size, "/images/wolf.png");
-
     time = millis();
 
-    // //to get the directions (input of KEY ARROWS) from both users
-    // socket.on('allDirData', (data) => {
-    //     coordinates = data;
-    // });
+    //Objects to initialize the game
+    gameGrid = new Grid(size, rows, cols);
+    pacman = new Player(14 * size, 22 * size, size, "/images/bunny.png");
+    ghost = new Player2(14 * size, 14 * size, size, "/images/wolf.png");
 
     socket.on("allPlayersData", (data) => {
         roles = data;
     })
 
-    //  socket.on('allDirData', function(obj) {
-    //   changeDirection(obj);
+    /////This part was supposed to update the coordinates of wolf and bunny on both screens. It is commented out because otherwise the players move.
+    // //to get the directions (input of KEY ARROWS) from both users
+    // socket.on('allDirData', (data) => {
+    //     coordinates = data;
     // });
 
 }
@@ -134,65 +134,65 @@ function draw() {
 
     if (gameState == "start") {
 
+        /////Same note: This part was supposed to update the coordinates of wolf and bunny on both screens. It is commented out because otherwise the players move.
         // direction = coordinates.pl1_dir;
         // direction_pl2 = coordinates.pl2_dir;
 
         background(bg);
         background(255, 255, 0, 100)
-        gameGrid.draw(); //draw the grid
 
+        gameGrid.draw(); //we start drawing the grid on screen
 
-
+        //To increment game speed when pacman/bunny eats carrots
         if (millis() - time >= wait) {
             pacman.move();
             ghost.move();
             time = millis(); //update the stored time
         }
 
-
+        //Display both characters after game speed is updated
         ghost.display();
         pacman.display();
 
-        currGrid = gameGrid.getCurrValue(pacman.x, pacman.y) // //check pacman position with respect to the grid
-        cellNum = gameGrid.getCurrCell(pacman.x, pacman.y) // gives index
-
-        //depending on the underlying grid value change the colour of the ellipse
-        if (currGrid == 1) { //if coin
+        //To change items in grid depending on pacman/bunny's position
+        currGrid = gameGrid.getCurrValue(pacman.x, pacman.y) //check value of grid (0-4) according to pacman/bunny's position
+        cellNum = gameGrid.getCurrCell(pacman.x, pacman.y) //gives index based on pacman/bunny's position
+        
+        if (currGrid == 1) { // if apple
             score++;
-            gameGrid.update(cellNum);
-        } else if (currGrid == 3) { //if wall
+            gameGrid.update(cellNum); //updates for an empty cell
+        } else if (currGrid == 3) { // if carrot
             wait -= 15;
             gameGrid.update(cellNum);
         }
-        // } else if (currGrid == 4) { //if power token
-        //     gameGrid.update(cellNum);
-        // }
 
-        currGrid_2 = gameGrid.getCurrValue(ghost.x, ghost.y) // //check pacman position with respect to the grid
-        cellNum_2 = gameGrid.getCurrCell(ghost.x, ghost.y) // gives index
-            //depending on the underlying grid value change the colour of the ellipse
-        if (currGrid_2 == 1) { //if coin
-            score++;
+        //To change items in grid depending on ghost/wolf's position
+        currGrid_2 = gameGrid.getCurrValue(ghost.x, ghost.y)
+        cellNum_2 = gameGrid.getCurrCell(ghost.x, ghost.y)
+        if (currGrid_2 == 1) { //if apple
+            score++;           //it also increases the score, since the goal of the wolf is to eat the bunny with the fewest moves 
             gameGrid.update2(cellNum_2);
-        } else if (currGrid_2 == 3) { //if wall
+        } else if (currGrid_2 == 3) { //if carrot
             wait -= 10;
             gameGrid.update2(cellNum_2);
-        } else if (currGrid == 4) { //if power token
-            gameGrid.update2(cellNum_2);
+        } 
+
+        //When bunny eats all the apples
+        if (score == gameGrid.toWin) {
+            gameState = "win"; //bunny wins
         }
 
-        if (score == gameGrid.toWin) {
-            gameState = "win";
-        }
+        //When wolf eats bunny
         if ((pacman.x == ghost.x) && (pacman.y == ghost.y)) {
-            gameState = "lose";
+            gameState = "lose"; //wolf wins
         }
 
         //Information displayed on html
         coin_html.innerHTML = "apples left: " + str(gameGrid.toWin - score);
-        player_html.innerHTML = "";
+        player_html.innerHTML = ""; //the information about the user was supposed to be displayed here, but it didn't fetch correctly
 
 
+        /////As an attempt to get the live coordinates of wolf and bunny, we used this. Commented out in case it's useful to debug our project in the future.
         // //Grab direction
         // let newLocation = { 
         //     player1: {
@@ -216,14 +216,14 @@ function draw() {
         textSize(20)
         textAlign(CENTER);
         text("PRESS SPACEBAR TO CONTINUE", 215, 60, 200, 400)
-            //text("KEY ARROWS TO MOVE", 139, 266)
+
         fill(0);
         textAlign(LEFT);
         text("A", 134, 235)
         text("S", 190, 235)
         text("D", 241, 235)
         text("W", 188, 182)
-            //console.log(mouseX, mouseY)
+
         fill(204, 255, 204);
         textSize(15);
         text("Wolf, touching the apples will make them inedible.", 33, 400, 240, 240);
@@ -231,7 +231,7 @@ function draw() {
         text("Bunny, it's time for lunch! Eat all the apples before the Wolf arrives.", 394, 314, 220, 240);
         text("Your favorite! Eat a carrot to gain some speed.", 394, 446, 220, 240);
         fill(255);
-        //text("Press any key to continue", 139, 577)
+
     } else if (gameState == "win") {
         background(255);
         image(bunny_wins_img, 0, 0, width, height);
@@ -240,7 +240,7 @@ function draw() {
         text("BUNNY", 24, 143)
         text("WINS", 24, 233)
         coin_html.innerHTML = "GAME OVER";
-        //console.log(mouseX, mouseY);
+
     } else if (gameState == "lose") {
         background(255, 0, 0);
         fill(0);
@@ -279,7 +279,6 @@ function keyPressed() {
             pl1_dir: direction,
             pl2_dir: direction_pl2
         };
-        //console.log(newLocation);
         socket.emit("directionData", newDirection);
 
     }
@@ -291,6 +290,7 @@ function keyPressed() {
 
 }
 
+//////Another method that we tried to display characters on both screens, based on example seen in class.
 // function changeDirection(obj){
 //     direction = obj.pl1_dir;
 //     direction_pl2 = obj.pl2_dir;

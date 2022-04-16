@@ -1,18 +1,20 @@
 //THIS PART IS TAKEN FROM MY CLASS NOTES: https://github.com/MathuraMG/ConnectionsLabSpring22/tree/master/Week_8_Sockets
 
-const { randomBytes } = require("crypto");
+const { randomBytes } = require("crypto"); //created by the server once it was started (?)
+
+// 1- For express 'app' object
 let express = require("express");
 const { all } = require("express/lib/application");
 let app = express();
 app.use('/', express.static("public"));
 
-//To start HTTP server
+// 2- For the http server
 let http = require("http");
 let server = http.createServer(app); //
 const { instrument } = require("@socket.io/admin-ui");
-let port = process.env.PORT || 8000;
+let port = process.env.PORT || 8000; //this is the port the server needs to listen to
 
-//To start connection with socket.io
+// 3- For the connection with sockets.io
 let io = require("socket.io");
 io = new io.Server(server,  {
     cors: {
@@ -20,69 +22,46 @@ io = new io.Server(server,  {
       credentials: true
     }
 });
-
 instrument(io, {
     auth: false
 });
 
+////4 - For communicating with CLIENT
+
+//Variables we communicate to CLIENT side
+const MAX_USERS = 2; //To limit the amount of people in each room
+let leaves = []; //to store all animation of 'leaves'
+let rooms = {}; // 'roomname' : number of people in room
+let users = {}; // 'username' : userid
 
 
-//To limit the amount of people in each room
-const MAX_USERS = 2;
-// to store prev leaves
-let leaves = [];
-let rooms = {}; // key value pair - 'roomname' : number of people in room
-let users = {}; // key value pair - 'username' : userid
+//Information that we want when a new socket connects
+io.sockets.on("connection", (socket) => 
+{
+    console.log("we have a new client: ", socket.id); //identify new client with its id
 
-//when a socket connects, take the socket callback, and display the id in the server
-io.sockets.on("connection", (socket) => {
-    console.log("we have a new client: ", socket.id);
-
-    //get user data
+    //we communicate user Data
     socket.on("userData", (data) => {
-        //save username in an array
+
+        //to save the username
         socket.name = data.name;
         users[socket.name] = socket.id;
 
-        socket.roomname = data.room; //data.room;
-
-
-        //to limit the number of people in each room 
-        if (rooms[data.room] < MAX_USERS) {
-            socket.roomName = data.room; // we will add this data to the socket only after we can verify that there is space
+        //to store the room name and cap the number of people to MAX_USERS (2)
+        socket.roomname = data.room;
+        if (rooms[data.room] < MAX_USERS) { //if there is space in the room, then the user joins and the number of people increases to 1
+            socket.roomName = data.room;
             socket.join(socket.roomName);
             rooms[socket.roomName]++;
         } else {
-            socket.emit("maxUsersReached");
+            socket.emit("maxUsersReached"); //if no space, then display message that MAX_USERS was reached
         }
-
-        console.log(rooms);
-
-        // // to limit the number of people in a room
-        // if(rooms[data.room]) { //if the room exists 
-        //     if(rooms[data.room]< MAX_USERS_ROOM) {
-        //         //let the socket join room of choice
-        //         socket.roomName = data.room; // we will add this data to the socket only after we can verify that there is space
-        //         socket.join(socket.roomName);
-        //         rooms[socket.roomName]++;
-        //     } else {
-        //         socket.emit('maxUsersReached');
-        //     }
-        // } else {
-        //     socket.roomName = data.room;
-        //     socket.join(socket.roomName);
-        //     rooms[socket.roomName]=1;   
-        // }
-
-        // console.log(rooms);
+        //console.log(rooms);
     })
 
-    //////
-
-    //drop a message on the server when the socket disconnects
+    //To identify when an user disconnects
     socket.on("disconnect", () => {
-        console.log("socket has been disconnected", socket.id);
-        // delete leaves and restore rooms
+        console.log("socket has been disconnected", socket.id); 
     })
 
     ////////////////////////////////////
@@ -114,22 +93,20 @@ io.sockets.on("connection", (socket) => {
     })
 
     ////////////////////////////////////
-    /// PACKMAN
+    /// PACMAN
     ////////////////////////////////////
 
     //listen for a message named "directionData" from this client
     socket.on("directionData", (data) => {
-        //console.log("Received new direction", data);
-
-        //send the new directions to all the servers
+        console.log(data); //NOTE: This data is perfectly being sent to the terminal. The problem with our program was to get to send it to all the users.
+        //send the new directions (input of clicked keys) to all the servers
         socket.to(socket.roomname).emit("allDirData", data);
 
     });
 
     socket.on('playersData', (data) => {
         console.log("List of players", data);
-
-        //send the new directions to all the servers
+        //send theinformation of all olayers to all the servers
         socket.to(socket.roomname).emit("allPlayersData", data);
     })
 })
