@@ -7,15 +7,15 @@ class Player2 extends Player {
         this.pl_y = y;
     }
 
-    move() {
+    move(dir2) {
         //directions controlled with keys
-        if (direction_pl2 == 1) {
+        if (dir2 == 1) {
             this.x += this.xspeed;
-        } else if (direction_pl2 == 2) {
+        } else if (dir2 == 2) {
             this.y -= this.yspeed;
-        } else if (direction_pl2 == 3) {
+        } else if (dir2 == 3) {
             this.x -= this.xspeed;
-        } else if (direction_pl2 == 4) {
+        } else if (dir2 == 4) {
             this.y += this.yspeed;
         }
     }

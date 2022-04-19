@@ -28,19 +28,30 @@ window.addEventListener("load", function() {
     socket.on("connect", () => {
         console.log("Connected to the server via sockets"); //to confirm connection on console
 
-        //after connection, the user receives the data about the other user's input (the coordinates of their characters). (Same note: the data didn't fetch correctly and I couldn't communicate it to all the users)
-        socket.on('allDirData', function(obj) {
+        // after connection, the user receives the data about the other user's input (the coordinates of their characters). (Same note: the data didn't fetch correctly and I couldn't communicate it to all the users)
+        socket.on('allDirData', (obj) => {
             direction = obj.pl1_dir;
             direction_pl2 = obj.pl2_dir;
+
+            // coordinates = {
+            //     x: obj.player1.new_x,
+            //     y: obj.player1.new_y
+            // }
+            // coordinates2 = {
+            //     x: obj.player2.new_x,
+            //     y: obj.player2.new_y
+            // }
+
+
         });
 
         //this sends data about the username and the room chosen on the landing page. For some reason this would also be sent after refreshing the game page, but not right after joining the room.
         userData = {
-            'name': sessionStorage.getItem('name'),
-            'room': sessionStorage.getItem('room'),
-            'player': this.sessionStorage.getItem('player')
-        }
-        //console.log(userData); to test if we were receiving the data correctly (which was not the case)
+                'name': sessionStorage.getItem('name'),
+                'room': sessionStorage.getItem('room'),
+                'player': this.sessionStorage.getItem('player')
+            }
+            //console.log(userData); to test if we were receiving the data correctly (which was not the case)
         socket.emit('userData', userData);
 
         //to create a list of player with their socket.id's
@@ -66,6 +77,7 @@ let pacman;
 let ghost;
 let score;
 let coordinates = {};
+let coordinates2 = {};
 
 //for the delay
 let time;
@@ -122,10 +134,7 @@ function setup() {
     })
 
     /////This part was supposed to update the coordinates of wolf and bunny on both screens. It is commented out because otherwise the players move.
-    // //to get the directions (input of KEY ARROWS) from both users
-    // socket.on('allDirData', (data) => {
-    //     coordinates = data;
-    // });
+    //to get the directions (input of KEY ARROWS) from both users
 
 }
 
@@ -144,19 +153,19 @@ function draw() {
 
         //To increment game speed when pacman/bunny eats carrots
         if (millis() - time >= wait) {
-            pacman.move();
-            ghost.move();
+            pacman.move(direction);
+            ghost.move(direction_pl2);
             time = millis(); //update the stored time
         }
 
         //Display both characters after game speed is updated
-        ghost.display();
         pacman.display();
+        ghost.display();
 
         //To change items in grid depending on pacman/bunny's position
         currGrid = gameGrid.getCurrValue(pacman.x, pacman.y) //check value of grid (0-4) according to pacman/bunny's position
         cellNum = gameGrid.getCurrCell(pacman.x, pacman.y) //gives index based on pacman/bunny's position
-        
+
         if (currGrid == 1) { // if apple
             score++;
             gameGrid.update(cellNum); //updates for an empty cell
@@ -169,12 +178,12 @@ function draw() {
         currGrid_2 = gameGrid.getCurrValue(ghost.x, ghost.y)
         cellNum_2 = gameGrid.getCurrCell(ghost.x, ghost.y)
         if (currGrid_2 == 1) { //if apple
-            score++;           //it also increases the score, since the goal of the wolf is to eat the bunny with the fewest moves 
+            score++; //it also increases the score, since the goal of the wolf is to eat the bunny with the fewest moves 
             gameGrid.update2(cellNum_2);
         } else if (currGrid_2 == 3) { //if carrot
             wait -= 10;
             gameGrid.update2(cellNum_2);
-        } 
+        }
 
         //When bunny eats all the apples
         if (score == gameGrid.toWin) {
@@ -193,7 +202,7 @@ function draw() {
 
         /////As an attempt to get the live coordinates of wolf and bunny, we used this. Commented out in case it's useful to debug our project in the future.
         // //Grab direction
-        // let newLocation = { 
+        // let newLocation = {
         //     player1: {
         //         new_x: pacman.x,
         //         new_y: pacman.y,
