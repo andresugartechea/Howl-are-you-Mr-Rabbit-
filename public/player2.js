@@ -8,6 +8,7 @@ class Player2 extends Player {
     }
 
     move() {
+        //directions controlled with keys
         if (direction_pl2 == 1) {
             this.x += this.xspeed;
         } else if (direction_pl2 == 2) {
@@ -20,15 +21,17 @@ class Player2 extends Player {
     }
 
     checkWall() {
+
+        //checks current position for collision detection
         this.currPos = this.getCurrValue(this.x, this.y);
 
-        if (this.x == -this.s) { //left path,pacman goes back in the map on the right
+        if (this.x == -this.s) { //left path, wolf goes back in the map from the right
             this.x = width - this.s;
-        } else if (this.x >= width) { //right path,pacman goes back in the map on the left
+        } else if (this.x >= width) { //right path, wolf goes back in the map from the left
             this.x = 0;
-        } else if (this.y < 0) { // up path, pacman goes back in the map from the bottom
+        } else if (this.y < 0) { // up path, wolf goes back in the map from the bottom
             this.y = height;
-        } else if (this.y > height) { //down path, pacman goes back in the from from the top
+        } else if (this.y > height) { //down path, wolf goes back in the from from the top
             this.y = 0;
         } else if ((direction_pl2 == 1) && (this.currPos == 2)) { //wall on the RIGHT
             let prev_x = this.x - this.s;
@@ -39,10 +42,9 @@ class Player2 extends Player {
         } else if ((direction_pl2 == 2) && (this.currPos == 2)) { //wall UP
             let prev_y = this.y + this.s;
             this.y = prev_y;
-        } else if ((direction_pl2 == 4) && (this.currPos == 2)) { //UP
+        } else if ((direction_pl2 == 4) && (this.currPos == 2)) { //wall DOWN
             let prev_y = this.y - this.s;
             this.y = prev_y;
         }
-
     }
 }
