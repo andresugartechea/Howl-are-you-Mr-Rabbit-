@@ -50,7 +50,6 @@ window.addEventListener("load", function() {
     })
 })
 
-
 //for grid class
 let gameGrid;
 let rows = 30;
